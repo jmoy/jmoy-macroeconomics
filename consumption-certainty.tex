@@ -1,0 +1,189 @@
+\documentclass[12pt,reqno]{amsart}
+\usepackage{mathpazo}
+\usepackage[scaled=0.9]{helvet}
+
+\newcommand{\newterm}[1]{\emph{#1}}
+
+\title{Consumption: Certainty}
+\author{Jyotirmoy Bhattacharya}
+\address{Ambedkar University Delhi}
+\email{jyotirmoy@jyotirmoy.net}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Two-period case}
+\subsection{Budget constraint}
+Consider a consumer who lives for two periods, has an endowment of
+$y_1$ and $y_2$ units of goods in the two periods respectively and can
+borrow and lend any amount that they like at the real rate of interest
+$r$. 
+
+Suppose the consumer consumes $c_1$ in the
+first period. Then she will have to take a loan of $c_1-y_1$ to
+finance her consumption. (This number can be negative, in which case
+the consumer is lending rather than borrowing.) In the next period the
+consumer will therefore have to make loan repayments of
+$(1+r)(c_1-y_1)$. Assume that the consumer does not want to make any
+bequests and cannot die with any outstanding loans, consumption in the
+second period must be,
+\[c_2=y_2-(1+r)(c_1-y_1)\]
+Simplifying and rearranging we have
+\begin{equation}\label{eq:two-period-budget}
+c_1+\frac{c_2}{1+r}=y_1+\frac{y_2}{1+r}
+\end{equation}
+This is the budget constraint faced by the consumer. We can interpret
+this to mean that the present value of the consumer's consumption
+stream must equal the present value of their incomes.
+
+\subsection{Utility maximization}
+Suppose the consumer maximises a quasiconcave utility function
+$U(c_1,c_2)$ subject to this budget constraint. Then the consumer's
+first-order conditions are
+\begin{align}
+U_1(c_1,c_2)&=\lambda\\
+U_2(c_1,c_2)&=\lambda/(1+r)
+\end{align}
+where $\lambda$ is the Lagrange multiplier corresponding to the budget
+constraint and $U_i(c_1,c_2)$ denotes the partial derivative $\partial
+U/\partial c_i$. We have explicitly shown the dependence of the
+partial derivatives on the value of consumption in both periods. These
+first-order conditions along with the budget
+constraint~\eqref{eq:two-period-budget} together determines the value
+of $c_1$, $c_2$ and~$\lambda$.
+\subsection{Comparative statics}
+Assuming that consumption in both periods is a normal good, an
+increase in either $y_1$ or $y_2$ increases both $c_1$ and $c_2$.
+
+The effects of a change in $r$ are ambiguous. An increase in $r$ makes
+consumption in period~$2$ relatively cheap compared to consumption in
+period~$1$. Therefore the substitution effect causes $c_1$ to decrease
+and $c_2$ to increase. It is traditional to decompose the income
+effect into two parts. First, an increase in $r$ reduces the present
+value of the consumer's endowments and hence decreases his real
+income. Second, an increase in $r$, by making the consumption in
+period~$2$ cheaper increases his real income.\footnote{
+For more about the Slutsky equation in the case of a consumer with
+fixed endowments of goods see section~9.1 in Varian's
+\emph{Microeconomic Analysis}, 3rd ed.} The sign of the
+resultant of these two effects on consumption depends on whether the
+consumer is a net lender in period~1 and a net borrower in period~2 or
+vice-versa. In case the consumer is a net lender in period~1 and a net
+borrower in period~2 the net income effect is positive. Assuming the
+consumption in both periods in a normal good, this means that the
+substitution effect and the income effect act in opposite directions
+on $c_1$ in this case leading to an ambiguous effect.
+
+\section{Many periods}
+Assume that rather than just living for two periods the consumer lives
+for $T+1$ periods. Further assume that the real rate of interest takes a
+constant value $r$ over the consumer's lifetime. For convenience we
+define $\delta=1/(1+r)$. It is also convenient to start time from
+period~0 rather than period~1.
+
+\subsection{Budget constraint}
+Arguing as before, the consumer's budget constraint is
+\begin{equation}\label{eq:many-period-budget}
+\sum_{i=0}^T \delta^i c_i = \sum_{i=0}^T \delta^i y_i
+\end{equation}
+
+\subsection{Utility function}
+We could proceed as before by assuming a utility function
+$U(c_0,\ldots,c_T)$ and deriving the first order conditions. However,
+because the marginal utility in each period depends on consumption in
+all periods it is hard to draw any sharp conclusions at this level of
+generality. Therefore we need to impose some restrictions on the form
+of the utility functions.
+
+Suppose, for example we assume that the utility function is additively
+separable, i.e.
+
+\begin{equation}\label{eq:utility-addsep}
+U(c_0,\ldots,c_T)=v_0(c_0)+v_1(c_1)+\cdots+v_T(c_T)
+\end{equation}
+
+Then the first-order conditions take the form
+
+\begin{equation}\label{eq:foc-additively-separable}
+v_i'(c_i) = \delta^i \lambda \qquad i=0,\ldots,T
+\end{equation}
+where, as before, $\lambda$ is the Lagrange multiplier corresponding
+to the budget constraint.
+
+Sometimes we want to restrict the consumers preferences even further,
+by assuming that the different $v_i$ differ from each other by only a
+geometric discounting factor.
+
+\begin{equation}\label{eq:utility-geometric}
+U(c_0,\ldots,c_T)=\sum_{i=0}^T \beta^i u(c_i)
+\end{equation}
+where $\beta$ is a constant, referred to as the subjective rate of
+discount, such that $0<\beta<1$.  
+
+In this case the first-order conditions take the particularly simple
+form
+\begin{equation}\label{eq:foc-stationary}
+u'(c_i)=\left(\frac{\delta}{\beta}\right)^i \lambda \qquad i=0,\ldots,T
+\end{equation}
+
+In case $\delta=\beta$, this implies that $u'(c_i)$ is the same for
+all $i$, which, assuming that $u'(\cdot)$ is a strictly decreasing
+function, means that $c_i$ is constant for all $i$. The present
+period's income does not influence the present period's consumption at
+all. Consumption is determined solely by lifetime resources as given
+by~\eqref{eq:many-period-budget}.
+
+The case $\delta \neq \beta$ is also instructive. Suppose
+$\delta>\beta$. In this case it follows from~\eqref{eq:foc-stationary}
+that consumption decreases over time. Formally, this is because if
+$\delta>\beta$ then by~\eqref{eq:foc-stationary} $u'(c_i)$ increases
+over time, and since $u'(c)$ is a decreasing function of consumption,
+this implies that $c$ decreases over time. 
+
+The economic logic behind this result is that $\delta$ is the number of
+units of consumption we have to give up at present in order to
+purchase one more unit of consumption next period, whereas $\beta$ is
+the number of units of marginal utility we are willing to give up at
+present in order to have one more unit of marginal utility in the next
+period. Suppose we start with the same consumption $c$ in this period and
+the next. If we reduce consumption in the next period by a small
+amount $\Delta c$ then at the prevailing market prices we can
+increase present consumption by $\delta\Delta c$. The increase in
+utility from the increase in present consumption is approximately
+$u'(c)(\delta\Delta c)$.\footnote{We are using Taylor's theorem:
+  $u(c+\delta\Delta c)-u(c) \approx u'(c)(\delta\Delta c)$} The decrease in utility from the reduction in
+next period's consumption is approximately $\beta u'(c)(\Delta c)$. The
+net change in utility would be $(\delta-\beta)u'(c)(\Delta c)$ which
+is positive when $\delta>\beta$. Thus it is beneficial to increase present consumption and
+reduce future consumption if we are starting from a position of
+equality. Indeed, it will be optimal to increase consumption in the
+present period (say period $i$) and decrease consumption in the next
+period (period $i+1$) till the following equality between the MRS and
+the price ratio is satisfied,
+\[\frac{u'(c_{i+1})}{u'(c_i)}=\frac{\delta}{\beta}\]
+\subsection{Exogenous variables}
+It is possible to unify~\eqref{eq:utility-addsep}
+and~\eqref{eq:utility-geometric} by writing
+\[v_i(c_i)=\beta^i u(c_i,\xi_i)\]
+where $\xi_i$ is an exogenous variable such a the consumer's age or
+the number of members in the household. In this case the first-order
+conditions become
+\[u'(c_i,\xi_i)=\left(\frac{\delta}{\beta}\right)^i \lambda \qquad
+i=0,\ldots,T\]
+Knowing how $\xi$ affects the marginal utility would
+now let us make some predictions regarding the path of consumption.
+
+\subsection{Comparative statics}
+Assuming that consumption in every period is a normal good, an
+increase in $y_i$ increases every $c_i$.
+
+The effect of an increase in $r$, or equivalently, a decrease in
+$\delta$ remains ambiguous because of the same income and substitution
+effects as discussed earlier. But for the utility function given
+by~\eqref{eq:utility-geometric}, we can say a little
+more. From~\eqref{eq:foc-stationary} we can see that a decrease in
+$\delta$ means that the \emph{growth rate} of consumption slows
+down. Remember that even in this case we do not have any information
+regarding the \emph{level} of consumption in any period since the
+level would depend on $\lambda$ which in turn depends on $\delta$.
+\end{document}
