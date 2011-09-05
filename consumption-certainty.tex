@@ -186,4 +186,137 @@ $\delta$ means that the \emph{growth rate} of consumption slows
 down. Remember that even in this case we do not have any information
 regarding the \emph{level} of consumption in any period since the
 level would depend on $\lambda$ which in turn depends on $\delta$.
+\section{Dynamic programming}
+\subsection{Example: log utility}
+Suppose that the consumer maximises
+\[\sum_{i=0}^T \log(c_i)\]
+subject to
+\begin{align*}
+  w_0&=\overline{w_0}\\
+  w_{t+1}&=R(w_t-c)\qquad \text{for $t=0,\ldots,T$}\\
+  w_{T+1}&=0
+\end{align*}
+
+What is the value function and policy function for this problem?
+
+Since there can neither be bequests nor outstanding debt at period
+$T$, the policy in that period is simple: consume all your
+wealth. Denoting the policy function by $g(\cdot)$ and the value
+function in period $t$ by $V_t(\cdot)$, we have,
+\begin{equation}\label{eq:dplog-T}
+g_T(w) = w,\qquad V_T(w_T) = \log(g_T(w))=\log(w)
+\end{equation}
+
+Now consider period $T-1$. Bellman's principle of optimality tells us,
+\begin{equation}\label{eq:dplog-optim-T1}
+\begin{split}
+V_{T-1}(w)&=\max_{c} [\log(c) + V_T(R(w-c))]\\
+&=\max_{c} [\log(c) +
+\log(R(w-c))]\qquad\text{[using~\eqref{eq:dplog-T}]}
+\end{split}
+\end{equation}
+
+The first-order condition for this maximisation problem is:
+\begin{equation*}
+\begin{split}
+\frac{1}{c}+\frac{-R}{R(w-c)}&=0\\
+w-c&=c\\
+c=w/2
+\end{split}
+\end{equation*}
+
+Since the objective function in~\eqref{eq:dplog-optim-T1} is concave
+in $c$ (check this!), the first-order condition is sufficient
+and gives us our policy function:
+\begin{equation*}
+g_{T-1}(w)=w/2
+\end{equation*}
+Substituting this into~\eqref{eq:dplog-optim-T1} we get the value
+function,
+\begin{equation}\label{eq:dplog-VT1}
+\begin{split}
+V_{T-1}(w)&=\log(g_{T-1}(w))+V_T(R(w-g_{T-1}(w)))\\
+&=\log(w/2)+\log(Rw/2)\\
+&=\log(R)+2\log(w/2)
+\end{split}
+\end{equation}
+
+Now that we know $V_{T-1}$ we could use the Bellman equation relating
+$V_{t-2}$ to $V_{t-1}$ to derive $g_{T-2}$ and $V_{t-2}$. If you do
+this you will find,
+\begin{equation}\label{eq:dplog-VT2}
+g_{T-2}(w) = w/3,\qquad V_{T-2}(w)=(1+2)\log(R)+3\log(w/3)
+\end{equation}
+
+We could continue like this to find $V_{T-3},\ldots,V_0$. In general
+this is precisely what we do. In fact, in most applications of dynamic
+programming  it is not possible to express the value function
+by a formula in the state variables and the best that we can do is to
+use a computer to calculate the value function at a number of possible
+values of the state variable using Bellman's equation.
+
+But our present problem is a particularly simple one. Looking
+at~\eqref{eq:dplog-VT1} and~\eqref{eq:dplog-VT2} suggests to us the
+guess,
+\begin{equation}\label{eq:dplog-Vn}
+V_{T-n}(w)=\frac{n(n+1)}{2}\log(R)+(n+1)\log\left(\frac{w}{n+1}\right)
+\end{equation}
+[Remember $1+2+\cdots+n=n(n+1)/2$]
+
+How do we check that our guess is right? We will use the principle of
+mathematical induction. By comparing to~\eqref{eq:dplog-VT1} we see
+that~\eqref{eq:dplog-Vn} is correct for $n=1$. Suppose that the
+equation is true for $n=k$. What then would be $V_{T-(k+1)}$? We once
+again write down the Bellman equation
+
+\begin{equation}\label{eq:dplog-optim-induct}
+\begin{split}
+V_{T-(k+1)}&=\max_c [\log(c)+V_{T-k}(R(w-c))]\\
+&=\max_c \left[\log(c)  +
+\frac{k(k+1)}{2}\log(R)+(k+1)\log\left(\frac{R(w-c)}{k+1}\right)\right]\\
+&
+\text{[assuming~\eqref{eq:dplog-Vn}]}
+\end{split}
+\end{equation}
+
+The first-order condition is:
+\begin{equation}\label{eq:dplog-policy}
+\begin{split}
+  \frac{1}{c} 
+  +
+  (k+1)\left(\frac{k+1}{R(w-c)}\right)\left(\frac{-R}{k+1}\right)&=0\\
+  (k+1)\frac{1}{(w-c)}&=\frac{1}{c}\\
+  c&=w/(k+2)
+\end{split}
+\end{equation}
+
+Substituting this into~\eqref{eq:dplog-optim-induct} we have
+\begin{equation}\begin{split}
+V_{T-(k+1)}&=\log(c)+\frac{k(k+1)}{2}\log(R)+(k+1)\log\left(\frac{R(w-c)}{k+1}\right)\\
+&\text{substituting~\eqref{eq:dplog-policy},}\\
+&=\log\left(\frac{w}{k+2}\right)
++\frac{k(k+1)}{2}\log(R)
++(k+1)\log\left(\frac{Rw}{k+2}\right)\\
+&=\log\left(\frac{w}{k+2}\right)
++\frac{k(k+1)}{2}\log(R)
++(k+1)\log(R)+(k+1)\log\left(\frac{w}{k+2}\right)\\
+&=\frac{(k+2)(k+1)}{2}\log(R)
++(k+2)\log\left(\frac{w}{k+2}\right)\\
+\end{split}
+\end{equation}
+But this is the same as~\eqref{eq:dplog-Vn} for $n=k+1$. We therefore
+conclude that if~\eqref{eq:dplog-Vn} is true for $n=k$ it is also true
+for $n=k+1$. We have already checked that~\eqref{eq:dplog-Vn} is true
+for $n=1$. Hence we conclude by the principle of mathematical
+induction that the value function for our dynamic
+programming problem is given by~\eqref{eq:dplog-Vn} for
+$n=1,\ldots,T$. 
+
+Also, now that we have verified that~\eqref{eq:dplog-Vn} is indeed the
+value function of the problem,~\eqref{eq:dplog-policy} gives the
+policy function, i.e.
+\begin{equation}\label{eq:dplog-policy2}
+  g_{T-n}(w)=w/(n+1)
+\end{equation}
+
 \end{document}
