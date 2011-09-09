@@ -318,5 +318,93 @@ policy function, i.e.
 \begin{equation}\label{eq:dplog-policy2}
   g_{T-n}(w)=w/(n+1)
 \end{equation}
+\section{The Euler equation}
+As we discussed in the last section, for most dynamic programming
+problems it is not possible to compute the value and policy functions
+in terms of simple formulae. The best we can do is to calculate
+numerical values. But even if we cannot find an exact formula for the
+solution to our optimisation problem, it may still be possible to get
+some qualitative information about the problem by studying the
+consequences of the Bellman equation. That is the
+subject of this section.
 
+Let's recall the Bellman equation,
+\[V_t(w_t)=\max_{c_t}[u(c_t)+V_{t+1}(R(w_t-c_t))\]
+
+The first order condition for this maximisation problem is:
+\begin{equation}\label{eq:euler-foc}
+  u'(c_t) = RV_{t+1}'(R(w_t-c_t))
+\end{equation}
+By itself~\eqref{eq:euler-foc} does not seem very useful unless we
+know $V_{t+1}(\cdot)$ and can calculate its derivative. But there is a
+trick that we can use to eliminate this unknown derivative
+from~\eqref{eq:euler-foc}.\footnote{The `trick' is a particular case
+  of a general result known as the envelope theorem. See section M.L
+  of Mas-Colell, Whinston and Green or some mathematical methods book for
+  more detail.}
+
+Let $c_t^*(w_t)$ be the optimal consumption in period $t$ when period
+$t$ wealth is $w_t$. From~\eqref{eq:euler-foc} we already know that,
+\begin{equation}\label{eq:euler-foc-fn}
+u'[c_t^*(w_t)]=RV_{t+1}'[R(w_t-c_t^*(w_t))]=RV_{t+1}'(w_{t+1})
+\end{equation}
+
+\pagebreak
+
+But from the definition of the value function
+\[V_t(w_t) = u[c_t^*(w_t)]+V_{t+1}[R(w_t-c_t^*(w_t))]\]
+Differentiating with respect to $w_t$ we have,
+\begin{align*}
+V_t'(w_t) &=
+u'[c_t^*(w)]{c_t^*}'(w_t)
++V_{t+1}'[R(w_t-c_t^*(w_t))][R(1-{c_t^*}'(w_t))]\\
+&={c_t^*}'(w_t)[u'(\cdot))-RV_{t+1}'(\cdot)]+RV_{t+1}'[R(w_t-c_t^*(w_t))]\\
+\intertext{From \eqref{eq:euler-foc-fn} the first terms equals $0$,
+  so,}
+V_t'(w_t)&=RV_{t+1}'(w_{t+1})\\
+\intertext{Using~\eqref{eq:euler-foc-fn}}
+V_t'(w_t)&=u'(c_t)
+\end{align*}
+
+The equation above was derived for arbitrary $t$. So it is equally
+good for $t+1$, i.e.
+\[V_{t+1}'(w_{t+1})=u'(c_{t+1})\]
+Substituting this in~\eqref{eq:euler-foc-fn} we have,
+\begin{equation}\label{eq:euler}
+\frac{u'(c_{t+1})}{u'(c_t)}=\frac{1}{R}=\delta
+\end{equation}
+
+This condition is known as the Euler\footnote{Pronounced
+  ``oiler''. Named after a eighteenth-century mathematician who was
+  among the earliest to study dynamic optimisation problems.} equation for our dynamic
+programming problem. We can alternatively derive it by starting out
+with an optimal consumption plan, increasing consumption in period $t$
+by a small amount $\Delta c$ and reducing consumption in period
+$t+1$ by $R\Delta c$ so that wealth at the end of the period
+$t+1$ is once again the same as what it would have been under the
+optimal plan. The first-order change in utility from this deviation is
+\[\Delta u=u'(c_t)[\Delta c]-u'(c_{t+1})[R\Delta c]\]
+Now for the original plan to have been optimal $\Delta u$ must be $0$
+since if $\Delta u>0$ the deviation considered above increases total
+utility whereas if $\Delta u<0$ then the opposite of the deviation
+considered above increases total utility. But $\Delta u=0$ implies 
+\[u'(c_t)-Ru'(c_{t+1})=0\]
+which is again our Euler equation~\eqref{eq:euler}.
+
+The Euler equation also follows from the first-order
+conditions~~\eqref{eq:foc-additively-separable} of the Lagrange-multiplier
+approach, showing that we have
+come full circle.
+
+The Euler equation tells us how consumption should grow or decline. It
+does not tell us the level of the consumption. But we can characterise
+the entire consumption path if we keep track of
+the path of wealth implied by the path of consumption and impose, in
+addition to the Euler equation, the
+conditions
+\[w_0 = \overline{w_0}\]
+which comes to us as a given data and 
+\[w_T=0\]
+which comes to us from our no bequest, no terminal borrowing,
+monotonic utility assumptions about the terminal period.
 \end{document}
