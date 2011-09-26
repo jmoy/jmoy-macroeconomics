@@ -4,6 +4,8 @@
 
 \newcommand{\newterm}[1]{\emph{#1}}
 \newtheorem{lem}{Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{cor}{Corollary}
 
 \title{Consumption}
 \author{Jyotirmoy Bhattacharya}
@@ -188,21 +190,279 @@ up. Remember that even in this case we do not have any information
 regarding the \emph{level} of consumption in any period since the
 level would depend on $\lambda$ which in turn depends on $\delta$.
 \section{Dynamic programming}
-\subsection{Example: log utility}
+\subsection{The setup}
+In a dynamic optimisation problem, our goal is to find a \emph{path}
+of the choice variable which maximises the value of an objective
+function defined over the entire path of the choice variable. Often,
+there are constraints on what paths can be chosen. For example, in the
+consumption-saving problem we choose a path of consumption which
+maximises the lifetime utility function subject to a budget
+constraint.
+
+The dynamic programming approach to solving dynamic optimisation
+problems  turns this single large optimization problem into a
+sequence of simple optimization problems. At each point of time we try
+to find the best action at that particular point of time. But since
+this is a dynamic problem after all, this search for the best actions
+at a particular point of time has to be done with an eye on both the
+past and the future. Past events and actions\footnote{We want to make
+  a distinction between \emph{events} which are outside of our control
+  and \emph{actions} which are things we choose. This distinction
+  becomes important when we are dealing with uncertainty.} determine what choices can be made now. By the
+same token, the action that we take now will change the options
+available to us the in future. The value of the objective function
+that will be achieved will in general depend on the entire path of
+past, present and future actions and not just the action in any period in
+isolation.
+
+In the dynamic programming framework this linkage between the past and
+the future is captured by the notion of the \emph{state}. Intuitively,
+we can think of the state at any given point of time as a description
+of all the \emph{relevant} information about the actions and events
+that have happened until that point. The state should contain all the
+information that is required from the decision-maker's history to
+determine the set of available actions at future points of time and to
+evaluate the contribution made by future actions to the objective
+function.
+
+The notion that knowing the state at a point of time is enough to know
+what actions are possible in the future is captured by the following definitions:
+\begin{description}
+\item[Set of states ($S_t$)] this is the set of possible states the
+  decision-maker can be in time $t$. There is one such set for each time
+  period $t$. The elements of these sets, i.e. the possible states,
+  are assumed to be vectors with real-number elements. Elements of
+  this set are denoted by $s_t$.
+\item[Set of actions ($A_t$)] this is the set of possible actions that
+  can be taken at time $t$. Elements of this set are denoted by
+  $a_t$. As we shall see next, all possible actions cannot be taken at
+  all possible states.
+\item[Constraint correspondence $f_t(s_t) \subset A_t$] this tells
+  us the subset of actions that are available in a particular
+  state. This is  not a function but a correspondence (i.e.~a
+  set-valued function) since for
+  each element of $S_t$ it gives us a subset and not just a single
+  element of $A_t$. 
+\item[Transition function $\Gamma_t(s_t,a_t) \in S_{t+1}$] This tells us
+  our state in period $t+1$ if we take the action $a_t$ in state $s_t$
+  in period $t$.
+\end{description}
+
+With these definitions in hand we can define the set of \emph{feasible
+  plans} when starting with $s_t$ at time $t$, denoted by
+$\Phi_t(s_t)$, as the set of sequences of actions $(a_t,\ldots,a_T)$
+such that
+\[a_i \in f_i(s_i) \quad \text{for $i=t,\ldots,T$}\]
+and
+\[s_{i+1} = \Gamma_i(s_i,a_i) \quad \text{for $i=t,\ldots,T-1$}\]
+The first condition says that the action taken on each date is a
+feasible action given the state. The second condition says that the
+state at each date is derived from the state and action taken in the
+previous date, with the state at time $t$ as given.
+
+The set of feasible plans tells us about the constraints faced in our
+optimisation problem. What about the objective function? We assume
+that the objective function can be written in an additively separable
+form
+\[U_t(a_t,s_t,\ldots,a_T,s_T)=\sum_{i=t}^T v_i(a_i,s_i)\]
+where $v_t(a_t,s_t)$ is the \emph{per-period payoff function} that
+gives the contribution of action $a_t$ in state $s_t$ at time $t$ to
+the overall objective. Being able to write the objective function in
+an additively separable form is essential for us to be able to use
+dynamic programming.\footnote{We are cheating a bit here. The
+  assumption of additive separability can be relaxed to what is called
+  `recursiveness' while still allowing the use of dynamic
+  programming.}
+
+In writing the above objective function we have also
+assumed that there is a finite time period $T$ at which our
+optimisation problem comes to an end. This assumption of what is known
+as a finite horizon is made just to simplify the mathematics. Dynamic
+programming problems with an infinite horizon are routinely used in
+economic modelling.
+
+The solution to the dynamic programming problem is expressed in terms
+of two functions:
+\begin{description}
+\item[Policy function $g_t(s_t) \in f_t(s_t)$] The policy function
+  tells us the best action to take in each possible state at time $t$
+  among all the available actions. In general it is possible that
+  there be two equally good actions at a particular state, in which
+  case the policy function would have to be replaced by the policy
+  correspondence.
+\item[Value function $V_t(s_t) \in \mathbb{R}$] The value function
+  denotes the maximum attainable value of the objective function when
+  starting at time $t$ from state $s_t$. That is,
+  \begin{equation*}
+    \begin{split}
+      V_t(s_t) &= \max_{(a_t,\ldots,a_T) \in \Phi_t(s_t)}\,
+      U_t(a_t,s_t,\ldots,a_T,s_T)\\
+      &=\max_{(a_t,\ldots,a_T) \in
+        \Phi_t(s_t)}\,[v_t(a_t,s_t)+\cdots+v_T(a_T,s_T)]
+      \end{split}
+    \end{equation*}
+\end{description}
+
+In applications of dynamic programming we generally want to know the
+optimal path starting at a specific point of time (taken to be $t=0$
+here) and from a particular state at that point of time (say $\bar
+s_0$). But we have defined the policy and value functions for all
+points of time and for each possible state at each of the time
+periods. Thus it would seem that we have multiplied our work manyfold
+beyond what is necessary for our original problem. But as we shall see
+below, being willing to contemplate the policy and value functions for
+all possible time periods and states often actually simplifies the
+task of solving the original problem.
+
+\subsection{Bellman's Principle of Optimality} 
+Suppose I am starting at some time $t<T$ from some particular state $s_t$ and
+trying to find the best actions from time $t$ to $T$, where `best'
+means the choices of actions and consequent states which maximise 
+\[U_t(a_t,s_t,\ldots,a_T,s_T)=\sum_{i=t}^T v_i(a_i,s_i).\] 
+Because of the additive nature of the lifetime utility function we can
+rewrite the above equation as
+\[U_t(a_t,s_t,\ldots,a_T,s_T)=v_t(a_t,s_t)+U_{t+1}(a_{t+1},s_{t+1},\ldots,a_T,s_T)\]
+If we divide the plan (path of actions and corresponding states) from
+time $t$ to time $T$ into a ``head'' consisting of the action in
+period $t$ and a ``tail'' consisting of actions in period $t+1$ to $T$
+then the above equation says that the lifetime utility of the plan
+starting at period $t$ is the sum of the per-period payoff at time $t$
+(the value of the ``head'') and the lifetime utility of the remaining
+part of the plan from period $t+1$ onwards (the value of the
+``tail'').
+
+How do we find the plan which maximises $U_t$? Suppose we choose the
+action $\hat a_t$ in period $t$. This will lead us to the state $\hat
+s_{t+1}=\Gamma_t(s_t,\hat a_t)$ in the next period. Now we have to
+pick a plan from period $t+1$ onward. Now $U_t=v_t(\hat
+a_t,s_t)+U_{t+1}$ and $v_t(\hat a_t,s_t)$ is already fixed by our
+choice of action $\hat a_t$ in period $t$. Therefore in choosing our
+plan from period $t+1$ onward the best we can do is to pick a plan
+that maximises $U_{t+1}$. This optimal plan for the ``tail'' yields
+the value of $U_{t+1}$ equal to $V_{t+1}(\hat s_{t+1})$. Thus we can
+evaluate each choice of action $\hat a_t$ in the ``head'' by looking
+at 
+\[\tilde U_t=v_t(\hat a_t,s_t)+V_{t+1}(\hat s_{t+1}),\quad 
+\text {where $\hat s_{t+1}=\Gamma(s_t,\hat a_t)$}\]
+We have put a tilde over $U_t$ to remind ourselves that now we are not
+considering arbitrary plans starting at $t$ but only plans where the
+``tail'' component is optimal given the state $\hat s_{t+1}$ at which
+we find ourselves in the beginning of period $t+1$. 
+
+The optimal plan from period $t$ involves choosing $\hat a_t$ which
+maximises the expression above. Since the value function gives the
+value of the objective function $U_t$ for the optimal plan, it is
+therefore the case that,
+\begin{equation}\label{dp:the-bellman}
+V_t(s_t)=\max_{\hat a_t \in f_t(s_t)}\,[v_t(\hat
+  a_t,s_t)+V_{t+1}(\Gamma(s_t,\hat a_t))], \quad \text{for $t<T$}
+\end{equation}
+
+Equation~\eqref{dp:the-bellman} above which relates the value function
+at consecutive time periods is known as \emph{Bellman's
+  Equation}. The argument above, which shows that the value function
+must satisfy Bellman's equation is known as \emph{Bellman's Principle
+  of Optimality}.\footnote{To be complete, Bellman's principle of
+  optimality also deals with the converse: that a function which
+  satisfies Bellman's equation plus some other technical conditions
+  must be the value function. This converse is not important in our
+  current finite horizon setting.}
+
+Intuitively Bellman's equation tells us that we can evaluate each present
+action by adding its contribution $v_t(\hat a_t,s_t)$ to the objective
+in the present period and the value $V_{t+1}(\hat s_{t+1})$ of the
+state in which
+it leaves us in the next period. Provided we know the function
+$V_{t+1}$ for all possible states in the next period we can choose the
+best action in the current period by choosing $\hat a_t$ to maximise
+this sum. Thus we have turned the big optimisation problem of choosing
+an entire sequence of actions from time $0$ to time $T$ into a
+sequence of simple optimisation problems, one for each time period
+$t$, in each of which we choose a single action $\hat a_t$.
+
+But there seems to be a chicken-and-egg problem: we cannot use
+Bellman's equation without knowing $V_{t+1}$ for each $t$ and how do
+we know $V_{t+1}$ if we have not solved the optimisation problem
+already? Here our finite horizon assumption makes life particularly
+simple for us. 
+
+Since period $T$ is the last period, our objective function in that
+period is
+\[U_T(a_T,s_T)=v_T(a_T,s_T)\]
+and the value function is simply given by
+\[V_T(s_T)=\max_{a_T \in f_T(s_T)}\, v_T(a_T,s_T)\] We can solve this
+maximisation problem and calculate $V_T$ since $v_T(\cdot,\cdot)$ is a
+known function.
+
+Now consider Bellman's equation for period $T-1$:
+\[V_{T-1}(s_{T-1})=\max_{\hat a_{T-1} \in f_t(s_{T-1})}\,
+[v_{T-1}( \hat a_{T-1},s_{T-1})+V_T(\Gamma(s_{T-1},\hat a_{T-1}))]\]
+
+As we have calculated $V_T(\cdot)$ in the previous step, all the
+functions in the maximisation problem are known and we can solve the
+problem to calculate $V_{T-1}$. With this in hand we can solve
+Bellman's equation for period $T-2$. We keep going backward one period
+at a time until we have calculated the value function for all periods
+until period $0$. At each step the value of $\hat a_t$, as a function
+of $s_t$, which solves the maximisation problem gives us the policy
+function. So by the end of our process we also have the policy
+function for each time period. 
+
+Now if we are given a starting state $\bar s_0$ in period $0$ we can
+use the calculated policy function for period $0$ to find the best
+action $a_0$ in period 0. We know from the transition function that we
+will end up in state $s_1=\Gamma(\bar s_0,a_0)$ in the next
+period. The policy function for period~$1$ tells us the best action
+$a_1$ to take in that period. We again use the transition function to
+tell us the next state $s_2=\Gamma(s_1,a_1)$. And so on until we have
+traced out the optimal plan to time $T$. Our optimisation problem is
+solved! 
+
+The way we have calculated the value function backwards from a
+known final time period is sometimes called ``backward induction''.
+
+\subsection{Example: consumption-savings with log utility}
 Suppose that the consumer maximises
 \[\sum_{i=0}^T \log(c_i)\]
 subject to
-\begin{align*}
-  w_0&=\overline{w_0}\\
-  w_{t+1}&=R(w_t-c)\qquad \text{for $t=0,\ldots,T$}\\
-  w_{T+1}&=0
-\end{align*}
+\[\sum_{i=0}^T c_i/R^i=w_0\]
 
-What is the value function and policy function for this problem?
+Can we solve this maximisation problem using dynamic programming? The
+action variable in this case must be $c_i$ since it is the variable
+being chosen by the decision maker. The
+objective function is already in an additively separable form with a
+per-period payoff $\log(c_i)$. But what is the state?
 
-Since there can neither be bequests nor outstanding debt at period
-$T$, the policy in that period is simple: consume all your
-wealth. Denoting the policy function by $g(\cdot)$ and the value
+Since the per-period payoff depends only on the action variable $c_i$
+we do not need any notion of state to evaluate payoffs. But the choice
+of a consumption in each period does affect future periods through the
+budget. The more we consume today, the less purchasing power we have
+to consume tomorrow. We can capture this by rearranging the budget
+slightly to read,
+\[\sum_{i=1}^T c_i/R^i = w_0-c_0\]
+Multiplying throughout by $R$ we have
+\[\sum_{i=1}^T c_i/R^{(i-1)} = R(w_0-c_0)\]
+Which shows us that the path of consumption from time~1 onwards
+follows a budget constraint of the same form as the period~0 budget
+constraint provided we take
+\[w_1=R(w_0-c_0)\]
+This suggests to us that we can take the wealth at the beginning of
+period~$t$ as our state with the transition function,
+\[w_{t+1}=R(w_t-c_t),\quad \text{for $t=0,\ldots,T$}\]
+and the constraint function
+\[c_T = w_T\]
+The constraint captures the fact that there can be no outstanding debt
+in the last period and a consumer who has monotonic preferences would
+not leave any wealth unused in the last period. There is no constraint
+on consumption in periods other that $T$.\footnote{We could have
+  imposed a non-negativity constraint but we leave it out for simplicity}.
+
+You can check that we have formulated the problem right by eliminating
+$w_1,\ldots,w_T$ in the transition functions and constraints above to
+recover our original budget constraint. 
+
+Now we can use backward induction to calculate the value function and
+policy function for all time periods. Denoting the policy function by $g(\cdot)$ and the value
 function in period $t$ by $V_t(\cdot)$, we have,
 \begin{equation}\label{eq:dplog-T}
 g_T(w) = w,\qquad V_T(w_T) = \log(g_T(w))=\log(w)
