@@ -164,6 +164,36 @@ present period (say period $i$) and decrease consumption in the next
 period (period $i+1$) till the following equality between the MRS and
 the price ratio is satisfied,
 \[\frac{u'(c_{i+1})}{u'(c_i)}=\frac{\delta}{\beta}\]
+
+If $\delta/\beta$ is close to $1$ then $c_{i+1}$ is close to $c_i$ and
+we can use Taylor's Theorem from calculus to the above equation to the
+above equation to get a useful approximation.
+\begin{align*}
+\frac{u'(c_{i+1})}{u'(c_i)}&=\frac{\delta}{\beta}\\
+\frac{u'(c_{i+1})-u'(c_i)}{u'(c_i)}&=\frac{\delta}{\beta}-1\\
+\intertext{Applying Taylor's Theorem}
+\frac{u''(c_i)(c_{i+1}-c_i)}{u'(c_i)}&\approx\frac{\delta}{\beta}-1\\
+\intertext{Defining $\Delta c=c_{i+1}-c_i$, and dropping the subscript
+$i$,}
+\left(\frac{u''(c)c}{u'(c)}\right)\left(\frac{\Delta
+    c}{c}\right)
+&\approx\frac{\delta}{\beta}-1\\
+\intertext{The quantity $\sigma=-u''(c)c/u'(c)$ is known as the
+  \emph{intertemporal elasticity of substitution} and captures the
+  sensitivity of marginal utility of changes in consumption. It is positive since marginal utility
+  decreases with consumption.}
+\left(\frac{\Delta
+    c}{c}\right)&\approx
+\frac{1}{\sigma}\left(1-\frac{\delta}{\beta}\right)
+\end{align*}
+The formula confirms our earlier reasoning that consumption decreases
+over time if $\delta>\beta$. Moreover, it shows that the sensitivity
+of the growth of consumption on the rate of return depends inversely
+on the intertemporal elasticity of substitution. The reason for this
+is that the more elastic is marginal utility to consumption, the smaller
+is the deviation in consumption from a constant path that is required
+the equate the ratio of marginal utilities in consecutive time periods
+to $\delta/\beta$.
 \subsection{Exogenous variables}
 It is possible to unify~\eqref{eq:utility-addsep}
 and~\eqref{eq:utility-geometric} by writing
