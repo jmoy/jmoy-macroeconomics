@@ -1,20 +1,42 @@
-\documentclass[12pt,reqno]{amsart}
-\usepackage{mathpazo}
-\usepackage[scaled=0.9]{helvet}
+\documentclass[12pt,reqno,openany]{amsbook}
+\usepackage{graphicx}
+\usepackage{amsthm}
+%\usepackage{mathpazo}
+%\usepackage[scaled=0.9]{helvet}
+
+\theoremstyle{plain}
+\newtheorem{lem}{Lemma}[chapter]
+\newtheorem{prop}{Proposition}[chapter]
+\newtheorem{cor}{Corollary}[chapter]
+
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[chapter]
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\tiny\thepage}
+\chead{\tiny\rightmark}
+\lfoot{\tiny\leftmark}
+\rfoot{\tiny\texttt Version: 2.0}
+\setlength{\footskip}{60pt}
+\renewcommand{\headrulewidth}{0pt}
 
 \newcommand{\newterm}[1]{\emph{#1}}
-\newtheorem{lem}{Lemma}
-\newtheorem{prop}{Proposition}
-\newtheorem{cor}{Corollary}
 
-\title{Consumption}
+
+\title{Macroeconomics}
 \author{Jyotirmoy Bhattacharya}
 \address{Ambedkar University Delhi}
 \email{jyotirmoy@jyotirmoy.net}
 \date{\today}
 
 \begin{document}
+%\frontmatter
 \maketitle
+\tableofcontents
+%\mainmatter
+\chapter{Consumption: Certainty}
 \section{Two-period case}
 \subsection{Budget constraint}
 Consider a consumer who lives for two periods, has an endowment of
@@ -344,7 +366,7 @@ below, being willing to contemplate the policy and value functions for
 all possible time periods and states often actually simplifies the
 task of solving the original problem.
 
-\subsection{Bellman's Principle of Optimality} 
+\section{Bellman's Principle of Optimality} 
 Suppose I am starting at some time $t<T$ from some particular state $s_t$ and
 trying to find the best actions from time $t$ to $T$, where `best'
 means the choices of actions and consequent states which maximise 
@@ -451,7 +473,7 @@ solved!
 The way we have calculated the value function backwards from a
 known final time period is sometimes called ``backward induction''.
 
-\subsection{Example: consumption-savings with log utility}
+\section{Example: consumption-savings with log utility}
 Suppose that the consumer maximises
 \[\sum_{i=0}^T \log(c_i)\]
 subject to
@@ -640,8 +662,6 @@ $t$ wealth is $w_t$. From~\eqref{eq:euler-foc} we already know that,
 u'[c_t^*(w_t)]=RV_{t+1}'[R(w_t-c_t^*(w_t))]=RV_{t+1}'(w_{t+1})
 \end{equation}
 
-\pagebreak
-
 But from the definition of the value function
 \[V_t(w_t) = u[c_t^*(w_t)]+V_{t+1}[R(w_t-c_t^*(w_t))]\]
 Differentiating with respect to $w_t$ we have,
@@ -699,8 +719,8 @@ which comes to us as a given data and
 which comes to us from our no bequest, no terminal borrowing,
 monotonic utility assumptions about the terminal period.
 
-\section{Uncertainty}
-\subsection{Euler equation}
+\chapter{Consumption: Uncertainty}
+\section{Euler equation}
 In the case of uncertainty in labour incomes, but with certain
 interest rates, the Euler equation becomes
 \begin{equation}\label{eq:euler-uncertain}
@@ -708,8 +728,8 @@ v_t'(c_t)=RE_t[v_{t+1}'(c_{t+1})]
 \end{equation}
 where $E_t$ denotes the mathematical expectation conditional on information at time~$t$.
 
-\subsection{Quadratic felicity}
-\subsubsection{Martingale property}
+\section{Quadratic felicity}
+\subsection{Martingale property}
 Suppose the felicity (i.e. per-period utility) function is
 \[v_t(c_t)=\beta^t(ac_t-0.5c_t^2)\]
 where $a$ is some constant.
@@ -754,7 +774,7 @@ pattern to the trajectory of consumption such as a changing pattern of
 lifetime consumption needs or differences between the subjective and
 market rate of discount.
 
-\subsubsection{A martingale lemma}
+\subsection{A martingale lemma}
 The definition of a martingale tells us about the expectation of a
 process at a period conditional on information available in the
 immediately preceding period. However, sometimes we need to find the
@@ -788,7 +808,7 @@ principle of mathematical induction that it is true for all $n>0$.
 \end{proof}
 
 
-\subsubsection{The level of consumption}
+\subsection{The level of consumption}
 The martingale property of consumption only tells us how consumption evolves from one
 point to the next, not the \emph{level} of consumption. The level of
 consumption would depend on the consumer's resources in terms of her
@@ -822,7 +842,7 @@ the entire remaining lifetime as well as initial wealth. This once
 again reiterates the idea of the permanent income hypothesis that the
 consumption in each period depends not just on income in that period
 but on the entire expected path of future income.
-\subsubsection{Increments in consumption}
+\subsection{Increments in consumption}
 With an explicit formula for the level of consumption in hand, we can
 now try to understand the martingale result better by seeing what it
 is exactly that drives changes in consumption.
@@ -865,7 +885,7 @@ goes further by predicting the actual size of the consumption change
 rather than just asserting that the expected value of this change
 would be zero.
 
-\subsubsection{Specific income processes}
+\subsection{Specific income processes}
 In general the difference in expectations which occur on the right
 of~\eqref{eq:increment-cons} depends on all the information which
 becomes available to the consumer between time $t$ and $t+1$. One
