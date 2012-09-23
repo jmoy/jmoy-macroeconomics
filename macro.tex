@@ -1,6 +1,7 @@
 \documentclass[12pt,reqno,openany]{amsbook}
 \usepackage{graphicx}
 \usepackage{amsthm}
+\usepackage[colorlinks,bookmarks,allcolors=blue]{hyperref}
 %\usepackage{mathpazo}
 %\usepackage[scaled=0.9]{helvet}
 
@@ -32,10 +33,10 @@
 \date{\today}
 
 \begin{document}
-%\frontmatter
+\frontmatter
 \maketitle
 \tableofcontents
-%\mainmatter
+\mainmatter
 \chapter{Consumption: Certainty}
 \section{Two-period case}
 \subsection{Budget constraint}
@@ -984,6 +985,9 @@ which comes to us as a given data and
 which comes to us from our no bequest, no terminal borrowing,
 monotonic utility assumptions about the terminal period.
 
+\chapter{Probability}
+This chapter is not a substitute for studying a probability text such
+as \cite{chung-elementary} or \cite{ross-probability}.
 \chapter{Consumption: Uncertainty}
 \section{Euler equation}
 In the case of uncertainty in labour incomes, but with certain
@@ -1218,5 +1222,9 @@ analogues for more complex income processes) from
 data on consumers' incomes  and then check if changes in consumption
 satisfy the forumla above. This yields a sharper test of our theory
 compared to just checking if consumption is a martingale.
+
+\backmatter
+\bibliographystyle{alpha}
+\bibliography{macro}
 
 \end{document}
