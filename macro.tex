@@ -1,6 +1,8 @@
 \documentclass[12pt,reqno,openany]{amsbook}
 \usepackage{graphicx}
 \usepackage{amsthm}
+\usepackage{url}
+\usepackage{nicefrac}
 \usepackage[colorlinks,bookmarks,allcolors=blue,plainpages=false]{hyperref}
 %\usepackage{mathpazo}
 %\usepackage[scaled=0.9]{helvet}
@@ -9,6 +11,7 @@
 \newtheorem{lem}{Lemma}[chapter]
 \newtheorem{prop}{Proposition}[chapter]
 \newtheorem{cor}{Corollary}[chapter]
+
 
 \theoremstyle{definition}
 \newtheorem{exmp}{Example}[chapter]
@@ -19,7 +22,7 @@
 \lhead{\tiny\thepage}
 \chead{\tiny\rightmark}
 \lfoot{\tiny\leftmark}
-\rfoot{\tiny\texttt Version: 2.1.0}
+\rfoot{\tiny\texttt Version: 3.0.0}
 \setlength{\footskip}{60pt}
 \renewcommand{\headrulewidth}{0pt}
 
@@ -1618,8 +1621,631 @@ data on consumers' incomes  and then check if changes in consumption
 satisfy the forumla above. This yields a sharper test of our theory
 compared to just checking if consumption is a martingale.
 
+\chapter{Overlapping Generations}
+The Ramsey model is at least in two ways a well-behaved model. First,
+the market equilibrium in the model is always Pareto optimal. Second,
+the dynamics of the model is very simple. Regardless of what capital
+stock we start the model with, both the capital/labour ratio and
+consumption/labour ratio move monotonically\footnote{that is, without
+  changing their direction of movement} towards their steady-state
+values.
+
+This simplicity of the Ramsey model is deceptive. Even within the
+Ramsey framework, very complex dynamics is possible if we consider
+multisector models rather than the single-good model that we have
+studied. However, equilibria are Pareto efficient in all Ramsey
+models, so this complex dynamics is still efficient.
+
+This is not the case in the overlapping generations models that we
+consider in this chapter. These models can demonstrate both complex
+dynamics and Pareto suboptimal equilibria. These models are completely
+orthodox methodologically: all agents in these economies are
+optimisers and have perfect foresight and all markets are competitive
+and in equilibrium at all times. Therefore their behaviour is even
+more surprising and causes us to question our understanding of the
+behaviour of even idealised competitive market economies. 
+
+An overlapping generations economy is an infinite-horizon economy in
+which the agents can be grouped into different `generations' such that
+the following properties hold.
+\begin{enumerate}
+\item At each point of time members of different generations coexist.
+\item There are generations whose lifetime is not the same
+as the lifetime of the entire economy.
+\end{enumerate}
+
+The above definition tries to capture the essence of the many
+different varieties of overlapping generations economies that have
+been studied in the literature. However, in this chapter we shall
+limit ourselves to very simple examples. We will find instances of
+counter-intuitive behaviour in even these simple cases.
+
+\section{Pure exchange: Incomplete Participation}
+Our first example is that of a pure exchange economy, i.e.\ an economy
+without production. Time is discrete and doubly infinite: there is an
+infinite past as well as an infinite future. 
+
+Agents have a two-period lifetime. At the beginning of each period a
+new generation of agents is born, which dies at the end of the next
+period. Following convention, we refer to the agents in the first
+period of their lives as `young' and in the second period of their
+lives as `old' respectively.
+
+All agents in the same generation are identical and each generation
+has the same number of agents. Because of these assumptions we can
+replace each generation by a single representative agent.
+
+There is a single physical good in the economy which is not storable.
+Each agent is endowed with some quantity of this good in each of the
+periods of their lives.
+
+Even though there is only one physical commodity, agents care not only
+about how much of this commodity they have but also when they have it.
+Therefore in economic terms we need to tag the quantities of the
+commodities with dates on which those quantities would be available.
+Thus, even with a single physical commodity there is a separate
+economic commodity corresponding to the delivery of this physical
+commodity on a particular date. Since our model has infinite number of
+periods we therefore have an infinity of economic commodities in our
+model. We call these economic commodities `dated-commodities' to
+indicate that along with a physical description each commodity is also
+marked with a delivery date.
+
+In this section we assume that in every period markets open to allow
+trading in all dated-commodities. Only those agents who live in a
+particular period can participate in that period's market. Neither the
+unborn nor the dead can trade. It is because of this last assumption
+that the model of this section is called a model of limited participation.
+
+To keep things simple we assume that every generation is alike in
+terms of having the same pattern of endowments and the same
+preferences over consumption streams. Note that this does not mean
+that the two periods of an agent's lifetime are alike. It is possible
+that the agents want to consume more when they are old. Or perhaps
+agents are richer when they are young. All we are assuming is that if
+one generation is richer when it is young then so are all generations
+and so on. This assumption of stationarity means that every period
+looks alike in our model. But in each period some agents are young and
+some are old and this is enough to generate interesting phenomena
+since we allow endowments and preferences to be age-dependent.
+
+\subsection{Notation}
+We will denote agent-specific variables by two subscripts: the first
+to indicate whether the variables pertains to the young~($1$) or old
+($2$) and the second to indicate the date to which the variable
+pertains. So an agent born in period~$t$, who lives in the periods~$t$
+and $t+1$ will have the consumption stream $(c_{1,t},c_{2,t+1})$ since
+the consumer will be young in period~$t$ and old in period~$t+1$. On
+the other hand the total consumption in period~$t$ will be
+$c_{1,t}+c_{2,t}$ since we need to add up the consumption of the young
+and the old, belonging to different generations, who live in period
+$t$.
+
+Our assumption of stationarity makes the notation simpler for
+endowments and utility functions. All generations have the same
+endowment stream $(\omega_1,\omega_2)$ and utility function
+$U(c_{1,t},c_{2,t+1})$.
+
+\subsection{Equilibrium}
+The way we have set up the model there is no opportunity to trade.
+Because there is only one good there are no trades within a period
+since there is no point buying and selling the same good. Therefore
+all trade must be across time, or in simpler language, the only
+possible trades involve borrowing and lending. Since each generation
+is homogeneous there cannot be any trade between members of the same
+generation. If one member of a generation wants to borrow then so do
+all members of that generation and vice versa. Finally, and most
+importantly, there can be no trade between generations because two
+agents of different generations meet only in one period. Today's old
+cannot trade with today's young since the former will not be around
+tomorrow to repay a loan they receive or collect on a loan they give.
+Today's young cannot trade with tomorrow's young since the latter have
+not been born yet.
+
+Thus in the way we have set up the model there can be no trade and the
+only possible equilibrium is the autarky equilibrium in which each
+agent consumes her endowment.
+
+In general equilibrium theory for economies with a finite number of
+goods and agents all competitive equilibrium are necessary Pareto
+optimal. This result is known as the ``First Fundamental Theorem of
+Welfare Economics''.\footnote{See \cite[16.C]{mascolell}. The
+  additional technical assumption of local non-satiation of
+  preferences is required. This is satisfied in all our examples.} The
+following examples shows that this theorem does not necessarily hold
+for overlapping generations model.
+
+\begin{exmp}\label{exmp:olg-np-single}
+Consider the economy as described above with the utility function
+for the initial old given by
+\[u(c_{2,0})=\ln(1+c_{2,0})\]
+and utility function for later generations given by
+\[u(c_{1,t},c_{2,t+1})=\ln(1+c_{1,t})+\ln(1+c_{2,t+1}).\]
+
+Suppose endowments are $\omega_1=1,\omega_2=0$.
+
+The autarkic equilibrium involves everyone consuming their endowments,
+i.e.
+\[c_{1,t}=1, c_{2,t}=0\]
+The utility of the initial old under this equilibrium is
+\[u(c_{2,0})=\ln (1+0)=0\]
+and the utility of all later generations is
+\[u(c_{1,t},c_{2,t+1})=\ln(1+1)+\ln(1+0)=\ln 2.\]
+
+It turns out that this allocation is not Pareto optimal. Consider the
+alternative allocation
+\[\hat c_{1,t}=\hat c_{2,t}=1/2\]
+We first check that this allocation is feasible given the economy's
+resources
+\[\hat c_{1,t}+\hat c_{2,t}=\omega_1+\omega_2=1\]
+
+The utility of the initial old under the hat allocation is higher
+\[u(\hat c_{2,0})=\ln (1+1/2) = \ln 3/2 >0\]
+
+The utility of all other generations under the hat allocation is also
+higher
+\[u(\hat c_{1,t},\hat c_{2,t+1})=\ln (1+1/2)+\ln(1+1/2)=\ln (3/2)^2 >
+\ln 2.\]
+
+Thus the hat allocation is a feasible allocation that makes all agents
+better off than the competitive allocation. Thus it is a Pareto
+improvement over the competitive allocation and its existence shows
+that the competitive allocation is not Pareto optimal.
+
+\qed
+\end{exmp}
+
+\begin{exmp}\label{exmp:olg-np-double}
+Consider an economy with the same structure as before but in which
+time is doubly infinite, i.e.\ time neither has a beginning nor an
+end. Because there is no initial period there is no initial old
+generation to consider. All generations are alike. Each generation has
+the utility function
+\[u(c_{1,t},c_{2,t+1})=\ln(1+c_{1,t})+\ln(1+c_{2,t+1}).\]
+and the endowment
+\[\omega_1=0, \omega_2=1.\]
+
+Once again, because any two generations meet only in a single period
+no trade is possible and the equilibrium allocation is the autarkic
+one
+\[c_{1,t}=0, c_{2,t}=1\]
+
+The alternative allocation
+\[\hat c_{1,t}=1/2, \hat c_{2,t}=1/2\]
+is feasible and we can check that it makes every generation strictly
+better off. So the autarkic equilibrium is once again not Pareto
+optimal.
+
+\qed
+\end{exmp}
+
+The failure of the First Fundamental Theorem in these examples is
+since this theorem has very few explicit assumptions and a
+straightforward proof and therefore would be expected to hold quite
+generally. What is going wrong?
+
+The infinity of time certainly has a role to play. In
+Example~\ref{exmp:olg-np-single} the Pareto improvement comes about
+because each generation gives up half a unit of the consumption goods
+to its elders during its youth and in return receives half a unit of
+the consumption good from its juniors in its own old age. If there had
+been an end of time then the last generation would not have had any
+juniors to compensate them and would have been worse off. Then the new
+allocation would no longer be a Pareto improvement. In
+Example~\ref{exmp:olg-np-double} the direction of transfers is the
+opposite and hence there would be no Pareto improvement if there had
+been a beginning of time.
+
+However, the infinity of time cannot by itself explain the failure of
+the First Fundamental Theorem. The Ramsey model provides a
+counterexample of a type of economy which also has infinite time
+but where the First Fundamental Theorem always holds.
+
+One property which differentiates overlapping generations models
+from both finite equilibrium models and the Ramsey model is the
+property of limited participation. Only agents who are alive on a
+certain date are allowed to buy and sell commodities deliverable on
+that date. The unborn and the dead are excluded from markets. While
+this is certainly reasonable from an economic point of view, can it be
+this exclusion which is responsible for the possibility of competitive
+equilibria not being Pareto optimal in this model?
+
+\section{Pure Exchange Economies: Complete Participation}
+To see whether it is the incompleteness of market participation which
+leads to non-Pareto optimal equilibria, we modify the overlapping
+generations by allowing all agents to trade in all dated commodities
+and looking for equilibrium prices. We might imagine a marketplace
+that stands outside of time, in which souls can trade for delivery of
+commodities at any point of time. We look for prices at which the
+demands and supplies of the souls of different generations match. We
+show by an example that even when completing the markets in this
+manner there still can be equilibria which are not Pareto optimal.
+
+\begin{exmp}\label{exmp:olg-complete}
+We continue with the economy of Example~\ref{exmp:olg-np-double} in
+which time is doubly infinite, preferences are given by
+\[u(c_{1,t},c_{2,t+1})=\ln(1+c_{1,t})+\ln(1+c_{2,t+1}).\]
+and endowments are
+\[\omega_1=0,\, \omega_2=1.\]
+
+Suppose that the price of the good in period~$t$ is~$p_t$. Then the
+consumer born in time~$t$ solves the problem
+\[\max_{c_{1,t},c_{2,t+1}} \ln(1+c_{1,t})+\ln(1+c_{2,t+1})\]
+subject to
+\[p_t(\omega_1-c_{1,t})=p_{t+1}(c_{2,t+1}-\omega_2)\]
+
+Assuming an interior solution the solution to this optimisation
+problem is\footnote{Exercise: derive this.}
+
+\begin{equation}\label{eq:olg-complete-demand}
+c_{1,t}=\frac{2(p_{t+1}/p_t)-1}{2},\quad
+c_{2,t+1}=\frac{p_t}{2p_{t+1}}
+\end{equation}
+
+Equilibrium requires
+\begin{equation}\label{eq:olg-complete-equil}
+c_{1,t}+c_{2,t}=\omega_1+\omega_2=1,\qquad \text{for all $t$}
+\end{equation}
+
+There are many sequence of prices which satisfy the above equilibrium
+conditions. Here are two interesting ones.
+
+First, the sequence $(\ldots,4,2,1,\nicefrac{1}{2},\nicefrac{1}{4},\ldots)$. That is
+$p_t=1/2^t$ for all~$t$. With these prices we see
+from~\eqref{eq:olg-complete-demand} that $c_{1,t}=0, c_{2,t+1}=1$ for
+all~$t$ which satisfies~\eqref{eq:olg-complete-equil}. This is an
+equilibrium in which every agent consumes their endowment---an
+allocation which we have shown to be Pareto inferior
+earlier.\footnote{We derived our demand
+  functions~\eqref{eq:olg-complete-demand} assuming an interior
+  solution to the consumer's maximisation problem. On the other hand,
+  the allocation in this case lies on the boundary of the consumption
+  set since $c_{1,t}=0$. Why is this not a problem?}
+
+Second, consider the prices $(\ldots,1,1,1,\ldots)$. That is $p_t=1$
+for all~$t$. For these prices $c_{1,t}=1/2, c_{2,t+1}=1/2$ which again
+satisfies~\eqref{eq:olg-complete-equil}. This allocation is an Pareto
+improvement on the previous allocation and we show in the appendix to
+this chapter that it is in fact Pareto optimal, that is there is no
+possibility of a further Pareto improvement from this allocation.
+
+\qed
+\end{exmp}
+
+Example~\ref{exmp:olg-complete} shows that Pareto suboptimal
+equilibria can persist in an overlapping generations economy even when
+we assume that all agents can participate in all markets. Thus it is
+not incomplete participation which is to blame for the Pareto
+suboptimality. Rather, it is the combination of an infinite horizon
+and an infinity of agents who do not live forever which is to blame
+for the failure of the First Welfare Theorem. 
+
+\section{Money}
+Overlapping generations models have also been used as a tool for
+studying monetary economies. Modern fiat money---unlike money based on
+precious metals---is intrinsically worthless. It is neither useful as
+an object of consumption nor is it useful as a factor of production.
+It is demanded only in the expectation that it will be accepted in
+exchange for useful goods. But those who accept money must in turn expect
+that it will be accepted by others when they try to spend it. This
+dependence of the value of money on the general belief in its
+acceptability is captured well by overlapping generations models.
+
+Consider an economy with singly-infinite time. The initial old have a
+utility function given by
+\[u_0(c_{2,0})\]
+and other generations have an utility function
+\[u(c_{1,t},c_{2,t+1}).\]
+Endowments in the two periods are~$\omega_1$ and~$\omega_2$ respectively.
+
+Only living people can trade. As we discussed earlier, with this
+assumption the only equilibrium in this model is an autarkic one.
+Example~\ref{exmp:olg-np-single} shows that this autarkic equilibrium
+might not be Pareto optimal.
+
+Now suppose we endow the initial old with $M$ units of useless but
+durable green pieces of paper that we call `money'. Assume that just
+like goods this money can also be traded by agents alive at each date.
+Let $p_t$ be the price of the consumption good in terms of money at
+time $t$.
+
+The decision problem of the initial old is simple. Since they have
+only one period to live and money is useless they sell the money for
+whatever it is worth in terms of consumption goods. So we have
+\begin{equation}\label{eq:olg-money-initial}
+c_{2,0}=M/p_0
+\end{equation}
+
+The later generations now have the choice of selling some goods in
+their youth and acquiring money. Since money is durable they can carry
+it over to their old age and spend it for consumption goods then. If
+we denote by $M^d_t$ the amount of money demanded in their youth by
+the generation born in period~$t$ then the optimisation problem for
+that generation is
+\[\max_{c_{1,t},c_{2,t+1},M^d_t} u(c_{1,t},c_{2,t+1})\]
+subject to
+\begin{align*}
+p_t(\omega_1-c_{1,t})&=M^d_t\\
+p_{t+1}(c_{2,t+1}-\omega_2)&=M^d_t\\
+M^d_t&\ge 0
+\end{align*}
+
+If we define real money demand by $m^d_t=M^d_t/p_t$ and the relative
+increase in prices by $\pi_{t+1}=p_{t+1}/p_t$ then the above
+optimization problem can be rewritten as
+\[\max_{c_{1,t},c_{2,t+1},m^d_t} u(c_{1,t},c_{2,t+1})\]
+subject to
+\begin{align*}
+\omega_1-c_{1,t}&=m^d_t\\
+c_{2,t+1}-\omega_2&=m^d_t/\pi_{t+1}\\
+m^d_t&\ge 0
+\end{align*}
+
+This form of the optimisation problem makes it clear that the real
+money stock demanded by a young agent equals that agent's real savings
+and $1/\pi_{t+1}$ is the returns that the agent earns on her savings.
+
+The solution of the optimisation problem gives us $m^d_t$, $c_{1,t}$
+and $c_{2,t+1}$ as functions of $\pi_{t+1}$. In particular we define
+\[m^d_t = L(1/\pi_{t+1})\]
+
+Equilibrium in the money market requires
+\begin{equation}\label{eq:olg-money-money}
+L(1/\pi_{t+1}) = M/p_t
+\end{equation}
+Equilibrium in the goods market requires
+\begin{equation}\label{eq:olg-money-goods}
+c_{1,t}+c_{2,t} = \omega_1+\omega_2
+\end{equation}
+
+From Walras' law we know that if one of these equilibrium conditions
+is satisfied then the other will be satisfied automatically.
+
+For periods $t>0$ we can use the consumer's budget constraint to
+rewrite~\eqref{eq:olg-money-goods} as follows
+\begin{equation}\label{eq:olg-money-diffeq}
+\begin{split}
+c_{1,t}+c_{2,t} &= \omega_1+\omega_2\\
+c_{2,t}-\omega_2 &= \omega_1-c_{1,t}\\
+m^d_{t-1}/\pi_t & = m^d_t\\
+L(1/\pi_t)\frac{1}{\pi_t} &= L(1/\pi_{t+1})
+\end{split}
+\end{equation}
+
+Using~\eqref{eq:olg-money-money} for $t=0$
+and~\eqref{eq:olg-money-diffeq} for $t>0$ and remembering that Walras'
+law allows us to use just one equilibrium condition per period we have
+the equilibrium conditions
+\begin{align}
+L(1/\pi_1)&=M/p_0\\
+L(1/\pi_t)\frac{1}{\pi_t} &= L(1/\pi_{t+1}), \qquad t>0
+\end{align}
+
+For simplicity let us look at steady state equilibria where $\pi_t$
+and hence $c_{1,t}$ and $c_{2,t}$ are constants. Then the equilibrium
+conditions become,
+\begin{align}
+\label{eq:olg-money-steady0} L(1/\pi)&=M/p_0\\
+\label{eq:olg-money-steadyt} L(1/\pi)(1/\pi) &= L(1/\pi)
+\end{align}
+
+There are two solutions to these equations. The first is a value of
+$\pi=\pi^*$ where 
+\[L(\pi^*)=0.\]
+There is always such a $\pi^*$ since if we take the relative price
+ratio between consumption in the two periods to be equal to the
+consumer's marginal rate of substitution at the endowment point then
+the consumer is happy consuming her endowment and does not want to
+hold any money.
+
+If $L(\pi^*)=0$ then~\eqref{eq:olg-money-steady0} cannot strictly be
+satisfied if $M>0$. However, loosely speaking we can say that this
+equation is satisfied with $p_0=\infty$. An infinite price of good in
+terms of money means that it is impossible to buy even the smallest
+amount of goods with any amount of money however large. Money is thus
+valueless in this equilibrium and everyone continues to consume their
+endowment.\footnote{If you are uncomfortable with infinity as a price,
+  you can get rid of it as follows. Rather than choosing money as the
+  numeriare choose an abstract numeriare in terms of which $\mu_t$ is
+  the price of money and $\lambda_t$ is the price of goods in 
+  period~$t$. Arguing as above then you will find an equilibrium with
+  $\mu_t=0$ for all $t$. Our $p_t=\lambda_t/\mu_t$ and hence it turns
+  out to be infinite in this equilibrium.}
+
+The other steady-state solution is the one with $\pi=1$. In this
+case~\eqref{eq:olg-money-steadyt} is automatically satisfied
+and~\eqref{eq:olg-money-steady0} gives us
+\[p_0 = M/L(1)\]
+If $L(1)=0$ then this once again gives us a equilibrium with
+$p_0=\infty$ where money is not valued. But if $L(1)>1$ then we have
+an equilibrium in which money has a constant value in the steady
+state. Thus even if money is useless it is possible to have an
+equilibrium with valued money in an overlapping generations model.
+
+
+\section*{Appendix}
+\begin{prop}
+In the overlapping generations model with utility function
+\[u(c_{1,t},c_{2,t+1})=\ln(1+c_{1,t})+\ln(1+c_{2,t+1}),\]
+stationary endowments $\omega_1=1, \omega_2=0$ and doubly-infinite
+time, the stationary allocation $c_{1,t}=1/2,c_{2,t}=1/2$ is Pareto
+optimal.
+\end{prop}
+
+\subsection*{The main idea}
+If the allocation mentioned in the proposition is not Pareto optimal then
+there must be another allocation which is a Pareto improvement, i.e.\
+which makes everyone at least as well off and at least one agent
+strictly better off. Let us denote this allocation by $(\hat
+c_{1,t},\hat c_{2,t})$. 
+
+Since any leftover output can be given to some agent to make them
+better off without making anyone worse off, we assume we have already
+done so, so that,
+\begin{equation}\label{eq:olg-hat-feas}
+\hat c_{1,t}+\hat c_{2,t} = \omega_1+\omega_2 =1
+\end{equation}
+
+If the allocation with the hats is different from
+$(1/2,1/2)$ there must be some~$t$ for which $\hat c_{1,t} \ne 1/2$ or
+$\hat c_{2,t} \ne 1/2$. From~\eqref{eq:olg-hat-feas} it then follows
+that for that~$t$ either $\hat c_{1,t}>1/2$ or $\hat c_{2,t}>1/2$. (Why?)
+
+Assume that $\hat c_{2,t}>1/2$ for some $t$. 
+
+(The argument remains basically unchanged when $\hat c_{1,t}>1/2$ if
+time is doubly infinite. All that we have to do is to look at periods
+before~$t$ rather than at periods after~$t$ as we do below. A little
+more change is required if time has a beginning. Try to think through
+both these cases once you have studied the case where $\hat
+c_{2,t}>1/2$.)
+
+If $\hat c_{2,t}>1/2$ then from~\eqref{eq:olg-hat-feas} it must be the
+case that $\hat c_{1,t}<1/2$. That is, the young born in period~$t$
+consume less in their youth under the hat allocation than they did in
+the initial allocation. But if the hat allocation is to be a Pareto
+improvement then these period-$t$ young have to be at least as well
+off under the hat allocation as under the original allocation. This
+can happen only if they consume more in their old age under the hat
+allocation than under the original allocation. So, it must be that
+$\hat c_{2,t+1}>1/2$.
+
+Let 
+\begin{align*}
+\delta_t &= 1/2-\hat c_{1,t}\\
+\phi_t &= \hat c_{2,t+1}-1/2
+\end{align*}
+
+We are looking at the case where $\delta_t>0$ and we have argued in the
+last paragraph that $\phi_t>0$. In fact we can do better than that.
+Here's how. Consider the possibility that $\phi_t=\delta_t$. Then
+\begin{align*}
+u(\hat c_{1,t},\hat c_{2,t+1})
+&=u(1/2-\delta_t,1/2+\phi_t)\\
+&=u(1/2-\delta_t,1/2+\delta_t)\\
+&=\ln(1+1/2-\delta_t)+\ln(1+1/2+\delta_t)\\
+&=\ln[(3/2-\delta_t)(3/2+\delta_t)]\\
+&=\ln[9/4-\delta_t^2]\\
+&< \ln(9/4)=u(c_{1,t},c_{2,t+1})
+\end{align*}
+
+Thus increasing consumption in old age by the same amount as
+consumption is reduced in youth will make the generation-$t$ agent
+strictly worse off than she was under the original $(1/2,1/2)$
+allocation. Therefore if the hat allocation is to keep the consumer at
+least as well off as before it must be the case that
+\begin{equation}\label{eq:olg-phi-delta}
+\phi_t>\delta_t
+\end{equation}
+
+But where is this extra consumption going to come from? It can only
+come by reducing the consumption of the young in period~$t+1$. Since
+\begin{align*}
+\hat c_{1,t+1}+\hat c_{2,t+1}&=1=1/2+1/2\\
+\intertext{It must be the case that,}
+1/2-\hat c_{1,t+1} &= \hat c_{2,t+1}-1/2
+\end{align*}
+If we define $\delta_{t+1}=1/2-\hat c_{1,t+1}$ the above shows that
+\[\delta_{t+1}=\phi_t>\delta_t>0\]
+
+Defining $\phi_{t+1}=\hat c_{2,t+2}-1/2$ and applying the argument
+that we applied to generation~$t$ to generation~$(t+1)$ we find that
+\[\delta_{t+2}=\phi_{t+1}>\delta_{t+1}>0\]
+
+Continuing to repeat this argument we get the chain of inequalities
+\begin{equation}\label{eq:delta-chain}
+\delta_t < \delta_{t+1} < \delta_{t+2} < \cdots
+\end{equation}
+
+The above chain of inequalities shows that $\delta_k$ increases with
+$k$. But there is an upper bound on $\delta_k$. Since 
+\[\delta_k = 1/2-\hat c_{1,k}\] 
+and $\hat c_{1,k} \ge 0$ it must be the case that 
+\begin{equation}\label{eq:bound-delta}
+\delta_k \le 1/2
+\end{equation}
+
+If we could use~\eqref{eq:delta-chain} to argue that $\delta_k$ grows
+without bounds then that would contradict~\eqref{eq:bound-delta} and
+we would have succeeded in proving that it is not possible to
+construct a Pareto improvement over the original allocation
+$(1/2,1/2)$.
+
+Unfortunately this is not the case. Equation~\eqref{eq:delta-chain}
+does not imply unbounded growth of $\delta_k$. A sequence like
+\[0.4,0.44,0.444,0.4444,\ldots\]
+can satisfy both~\eqref{eq:delta-chain} and~\eqref{eq:bound-delta}. So
+in order to be successful in our proof we have to find a way to
+strengthen~\eqref{eq:delta-chain}.
+
+\subsection*{A stronger inequality}
+As before we define
+\begin{align*}
+\delta_k&=1/2-\hat c_{1,k}>0\\
+\phi_k&=\hat c_{2,k+1}-1/2>0
+\end{align*}
+
+Also as before feasibility requires
+\begin{equation}\label{eq:olg-feas}
+\phi_k=\delta_{k+1}
+\end{equation}
+
+For the hat allocation to be a Pareto improvement it is necessary that
+\begin{align*}
+u(\hat c_{1,k},\hat c_{2,k+1}) &\ge u(c_{1,k},c_{2,k+1})\\
+u(1/2-\delta_k,1/2+\phi_k) &\ge u(1/2,1/2)\\
+\ln [(3/2-\delta_k)(3/2+\phi_k)] &\ge \ln (9/4)\\
+\frac{9}{4} + \frac{3}{2}\phi_k - \frac{3}{2}\delta_k -\delta_k\phi_k
+&\ge \frac{9}{4}\\
+\frac{\phi_k}{\delta_k} &\ge \frac{1}{1-2\delta_k/3}
+\end{align*}
+
+Now we know from~\eqref{eq:delta-chain} that $\delta_t \le \delta_k$
+for $k \ge t$. Applying this to the denominator of the above
+expression and remembering that $\delta_t \le 1/2$
+from~\eqref{eq:bound-delta} we have
+\begin{equation*}
+\frac{\phi_k}{\delta_k} 
+\ge \frac{1}{1-2\delta_t/3} 
+\ge \frac{1}{1-2\cdot(1/2)/3} = 3/2
+\end{equation*}
+
+But $\phi_k=\delta_{k+1}$ so we have
+\begin{equation}\label{eq:olg-delta-strong}
+\frac{\delta_{k+1}}{\delta_k} \ge 3/2
+\end{equation}
+
+This says that in each period~$\delta$ grows at least~1.5 times. As a
+result it will grow unboundedly starting from any nonzero value.
+Formally, by starting from time~$t$ and chaining
+together~\eqref{eq:olg-delta-strong} together $j$~times we have
+\[\delta_{t+j} \ge (3/2)^j \delta_t\]
+Provided $\delta_t>0$ the right-hand side becomes larger than $1/2$
+for large enough~$j$ and hence contradicts~\eqref{eq:bound-delta},
+thus proving that no Pareto improvement over our original allocation
+is possible.
+
+\subsection*{Generalisation}
+The inequalities~\eqref{eq:delta-chain}
+and~\eqref{eq:olg-delta-strong} were derived using a particular
+functional form of the utility function and a particular initial
+allocation. But the style of reasoning we have used above can be
+generalised to provide a criteria for Pareto optimality applicable to
+arbitrary utility functions and arbitrary allocations. See
+Proposition~5.6 of~\cite{balasko1980overlapping}.
+
+
+
+
+
+
+
+
+
+
+
+
 \backmatter
-\bibliographystyle{alpha}
-\bibliography{macro}
+\bibliographystyle{alpha} \bibliography{macro}
 
 \end{document}
