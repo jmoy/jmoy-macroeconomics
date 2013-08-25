@@ -423,7 +423,9 @@ $c_1,\ldots,c_m$. The value function will be given by
 Suppose we want to calculate the partial derivative of the value
 function with respect to one of the parameters, say $c_j$. In doing so
 we have to take into account the fact that the optimal value of each
-of the choice variables would also be a function of $c_i$. So we use the
+of the choice variables would also be a function of $c_i$.
+If we assume that the mapping from the $c_i$ to the optimal
+values of the choice variables is differentiable, we can use the
 chain rule,
 \[\frac{\partial V}{\partial c_j}=
 \frac{\partial \phi}{\partial x_1}\frac{\partial x_1^*}{\partial c_j}
@@ -515,9 +517,13 @@ The first-order condition for this problem is
 \end{equation}
 where $\lambda$ is a Lagrange multiplier.
 
-As before, if the problem has a solution the optimal values of the
-choice variables, the $x_i^*$, will be functions of the parameters of
-the problem. Also as before, we can define the value function as
+As before, if the problem has a solution the optimal values
+of the choice variables, the $x_i^*$, will be functions of
+the parameters of the problem. Once again we look at the
+case where this mapping is differentiable.\footnote{For
+  sufficient conditions that this be so
+  see~\cite[Section~11.7]{luenberger-lin-nonlin}.} Also as
+before, we can define the value function as
 \[V(c_1,\ldots,c_m)=\phi(x_1^*,\ldots,x_n^*;c_1,\ldots,c_m)\]
 
 Differentiating the value function with respect to $c_j$ gives us,
