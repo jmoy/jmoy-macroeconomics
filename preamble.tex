@@ -28,6 +28,11 @@
 
 \theoremstyle{definition}
 \newtheorem{exmp}{Example}[chapter]
+
+\usepackage{enumitem}
+\newenvironment{exercises}{%
+\begin{enumerate}[leftmargin=*,itemsep=10pt plus 2pt minus 1pt,label={\arabic*.}]}{%
+\end{enumerate}}
 \newtheorem{excr}{Exercise}[chapter]
 
 \newcommand{\myversion}{v4.0.0}
