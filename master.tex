@@ -167,17 +167,17 @@ Firms decide how much to invest based on the current
 level of the capital stock, the current and future levels of
 output and the real rate of interest. 
 
-The economic story for investment is that the desired level of capital
-stock depends positively on present and future expected
-profitability and negatively on the real rate of interest
-(since a higher real rate of interest implies that a unit of
-real output in the future is worth relatively less in terms
-of present output). The higher the gap between desired and
-actual capital stock, the higher is the rate of investment.
-Once again suppressing the variables fixed in the short-run
-we have $I=I(Y,i-\pi^e)$ where $i-\pi^e$, the difference
-between the nominal rate of interest and expected inflation,
-equals the real rate of interest.
+The economic story for investment is that the desired level
+of capital stock depends positively on present and future
+expected profitability and negatively on the real rate of
+interest (since a higher real rate of interest implies that
+a unit of real output in the future is worth relatively less
+in terms of present output). The higher the gap between
+desired and actual capital stock, the higher is the rate of
+investment.  Once again suppressing the variables fixed in
+the short-run we have $I=I(Y,i-\pi^e)$ where $i-\pi^e$, the
+difference between the nominal rate of interest and expected
+inflation, equals the real rate of interest.
 
 In equilibrium, the total output of goods must equal the
 total demand for goods, that is it must be the case that 
@@ -437,45 +437,63 @@ there are different modelling choices that can be made. See
 alternative ways of setting it up. For critiques, see
 \cite{barro1994aggregate} and \cite{colander1995stories}.
 \chapter{Consumption: Certainty}
+Savings is not an end in itself. Rather savings is the means
+a household adopts in order to provide for future
+needs. Therefore we can hope to be able to better analyse
+and predict consumption-saving behaviour if instead of
+thinking of the household as choosing between consumption
+and savings we think of the household as choosing between
+fulfilling present needs and fulfilling future ones. This is
+the starting point of the intertemporal theory of
+consumption. To more clearly see this central tradeoff
+between the present and the future we begin by assuming in
+this chapter that the household faces no uncertainity
+regarding future needs and opportunities. Of course, in
+reality uncertainty has an important influence on
+intertemporal choices and we extend our discussion to take
+it into account in Chapter~\ref{ch:cons-uncertain}
 \section{Two-period case}
 \subsection{Budget constraint}
-Consider a consumer who lives for two periods, has an endowment of
-$y_1$ and $y_2$ units of goods in the two periods respectively and can
-borrow and lend any amount that they like at the real rate of interest
-$r$. 
+Consider a consumer who lives for two periods, has an
+endowment of $y_1$ and $y_2$ units of goods in the two
+periods respectively and can borrow and lend any amount that
+they like at the real rate of interest $r$.
 
-Suppose the consumer consumes $c_1$ in the
-first period. Then she will have to take a loan of $c_1-y_1$ to
-finance her consumption. (This number can be negative, in which case
-the consumer is lending rather than borrowing.) In the next period the
-consumer will therefore have to make loan repayments of
-$(1+r)(c_1-y_1)$. Assume that the consumer does not want to make any
-bequests and cannot die with any outstanding loans, consumption in the
-second period must be,
+Suppose the consumer consumes $c_1$ in the first
+period. Then she will have to take a loan of $c_1-y_1$ to
+finance her consumption. (This number can be negative, in
+which case the consumer is lending rather than borrowing.)
+In the next period the consumer will therefore have to make
+loan repayments of $(1+r)(c_1-y_1)$. Assume that the
+consumer does not want to make any bequests and cannot die
+with any outstanding loans, consumption in the second period
+must be,
 \[c_2=y_2-(1+r)(c_1-y_1)\]
 Simplifying and rearranging we have
 \begin{equation}\label{eq:two-period-budget}
 c_1+\frac{c_2}{1+r}=y_1+\frac{y_2}{1+r}
 \end{equation}
-This is the budget constraint faced by the consumer. We can interpret
-this to mean that the present value of the consumer's consumption
-stream must equal the present value of their incomes.
+This is the budget constraint faced by the consumer. We can
+interpret this to mean that the present value of the
+consumer's consumption stream must equal the present value
+of their incomes.
 
 \subsection{Utility maximization}
-Suppose the consumer maximises a quasiconcave utility function
-$U(c_1,c_2)$ subject to this budget constraint. Then the consumer's
-first-order conditions are
+Suppose the consumer maximises a quasiconcave utility
+function $U(c_1,c_2)$ subject to this budget
+constraint. Then the consumer's first-order conditions are
 \begin{align}
 U_1(c_1,c_2)&=\lambda\\
 U_2(c_1,c_2)&=\lambda/(1+r)
 \end{align}
-where $\lambda$ is the Lagrange multiplier corresponding to the budget
-constraint and $U_i(c_1,c_2)$ denotes the partial derivative $\partial
-U/\partial c_i$. We have explicitly shown the dependence of the
-partial derivatives on the value of consumption in both periods. These
-first-order conditions along with the budget
-constraint~\eqref{eq:two-period-budget} together determines the value
-of $c_1$, $c_2$ and~$\lambda$.
+where $\lambda$ is the Lagrange multiplier corresponding to
+the budget constraint and $U_i(c_1,c_2)$ denotes the partial
+derivative $\partial U/\partial c_i$. We have explicitly
+shown the dependence of the partial derivatives on the value
+of consumption in both periods. These first-order conditions
+along with the budget
+constraint~\eqref{eq:two-period-budget} together determines
+the value of $c_1$, $c_2$ and~$\lambda$.
 \subsection{Comparative statics}
 Assuming that consumption in both periods is a normal good, an
 increase in either $y_1$ or $y_2$ increases both $c_1$ and $c_2$.
@@ -644,6 +662,137 @@ up. Remember that even in this case we do not have any information
 regarding the \emph{level} of consumption in any period since the
 level would depend on $\lambda$ which in turn depends on
 $\delta$.
+
+\section*{Exercises}
+\begin{exercises}
+  \item A consumer consumes a single good in two
+  periods---period~1 and period~2. Let her consumption in the two
+  periods be denoted by $c_1$ and $c_2$ respectively. The consumer has
+  an endowment of $e_1$ and $e_2$ units of consumption in the two
+  periods respectively. The consumer has no other sources of income or
+  wealth. Assume that the \emph{money} price of the consumption good
+  in the two periods is $P_1$ and $P_2$ respectively and the nominal
+  interest rate between the two periods is $i$.
+  \begin{enumerate}
+    \item Write down the consumer's budget constraint. 
+
+    \item Write down an exact (not approximate) formula for the real
+    interest rate in this setting in terms of $P_1$, $P_2$ and
+    $i$. (Think of how many additional units of consumption you can
+    get in period~2 if you give up one unit of consumption in
+    period~1).
+
+    \item Argue that the consumer's budget set depends only on the
+    real rate of interest, i.e., combinations of changes in prices and
+    the nominal interest rate which leave the real interest rate
+    unchanged also leave the consumer's budget set unchanged.
+
+    \item Assume that the consumer's utility function is given by:
+    \[U(c_1,c_2) = c_1c_2\]
+    Calculate the amount consumed and the amount saved by the consumer
+    in period~1 as a function of the real interest rate. Sketch rough
+    graphs of these two functions.
+  \end{enumerate}
+  
+  \item Consider a consumer who lives from period $0$ to $T$,
+  has an initial wealth $w$ and no other sources of income. Suppose
+  that the consumer has additive separable preferences with the
+  felicity function,
+  \[v_i(c_i)=\beta^i c_i^{1-\rho},\quad 0<\rho<1.\]
+  The consumer can lend and borrow any amount she wishes at the real
+  rate of interest~$r$.
+  \begin{enumerate}
+    \item What is the intertemporal elasticity of substitution
+    corresponding to this consumer's felicity function?
+    
+    \item Use the first-order conditions of the conumer's utility
+    maximization problem (not a linear approximation) to show that the
+    optimal consumption path chosen by this consumer shows a constant
+    rate of growth of consumption. Derive an expression for the growth
+    rate of consumption in terms of $\beta$, $r$ and~$\rho$.
+  \end{enumerate}
+
+  \item Consider a consumer who lives for two periods and must
+  decide on how much to spend on a durable good in each of the two
+  periods. The consumer's utility function is given by
+  \[U(x_1,x_2)=[x_1^{1-\rho}+x_2^{1-\rho}]/(1-\rho),\qquad \rho>0\]
+  where $x_1$ and $x_2$ is the stock of durable goods held by the
+  consumer in the two periods. 
+
+  The stocks are related to the
+  consumer's expediture $c_1$ and $c_2$ in the two periods by
+  \begin{align*}
+    x_1&=c_1\\
+    x_2&=\gamma x_1+c_2,\qquad{0<\gamma<1}
+  \end{align*}
+  where $(1-\gamma)$ is the rate at which the stock of the
+  durable depreciates.
+
+  The consumer has an initial wealth $w$ and no other source
+  of income. She is free to lend and borrow at the interest
+  rate $r$.
+
+  Under what conditions on $\gamma$, $R$ and $\rho$ will the consumer
+  not spend anything in the second period? Give an economic
+  interpretation for your result.
+
+\item A and B are two agents who derive satisfaction from
+  the consumption of leisure and apples over a number of
+  periods. For A leisure and apples are substitutes whereas
+  for B leisure and apples are complements. Suppose an
+  exogenous shock reduces the leisure available to both in a
+  given period without affecting their incomes. How will the
+  consumption of apples in that period change for each?
+
+\item Consider a consumer who lives for two periods. The
+  consumer has a real earning of $y_1$ and $y_2$ in the two
+  periods respectively and must choose his level of real
+  consumption $c_1$ and $c_2$ in the two periods.
+
+  The consumer can lend and borrow at the real rate of
+  interest~$r$. However, the consumer cannot borrow more
+  than a fraction $\theta$ ($0<\theta<1$) of the present value of his second period
+  earnings. That is, if $b_1$ is the amount borrowed by the
+  consumer in the first period then it must be the case that
+  \[b_1 \leq \frac{\theta y_2}{1+r}.\] There are no
+  restrictions on the amount that the consumer can lend.
+
+  \begin{enumerate}
+    \item Sketch the consumer's budget set in the $c_1$, $c_2$ plane.
+    \item Suppose that the consumer's utility function is given by
+      \[U(c_1,c_2)=\ln c_1+\ln c_2.\] Calculate the
+      consumer's first-period consumption demand ($c_1$) as
+      a function of $y_1$, $y_2$, $\theta$ and~$r$.
+      [Hint: Take the possibility of a corner solution into account.]
+    \item Calculate this consumer's first-period marginal
+      propensity to consume $\partial c_1/\partial y_1$. How
+      does this marginal propensity to consume change with
+      changes in $y_1$? Explain your answer in economic
+      terms.
+    \end{enumerate}
+
+  \item Consider the following example of a two-period utility
+    function with habit formation:
+    \[U(c_1,c_2)=\frac{1}{1-\rho}[c_1^{1-\rho}+(c_2-\gamma
+    c_1)^{1-\rho}],\qquad \gamma>0,\rho>0\]
+    \begin{enumerate}
+    \item Suppose a consumer with these preferences has an
+      initial wealth $w$, no other sources of income and can
+      freely lend and borrow at the interest rate~$r>0$.
+      What will be the consumer's optimal choice of $c_1$
+      and $c_2$?
+    \item An economist wishes to use observed data on $c_1$,
+      $c_2$ and~$r$ to estimate the parameter $\rho$. But
+      the economist mistakenly assumes that there is no
+      habit formation. That is, the economist mistakenly
+      assumes that the consumer's preferences are
+      \[U(c_1,c_2)=\frac{1}{1-\rho}[c_1^{1-\rho}+c_2^{1-\rho}],\qquad
+      \rho>0.\]
+
+      Will this economist's estimate of $\rho$ be higher or
+      lower than the true value?
+    \end{enumerate}
+\end{exercises}
 \chapter{The Envelope Theorem}
 \section{Parametrised optimisation problems}
 Let's think of unconstrained problems first. Every optimisation
@@ -1823,7 +1972,7 @@ principle of mathematical induction that it is true for all $n>0$.
 
 
 
-\chapter{Consumption: Uncertainty}
+\chapter{Consumption: Uncertainty}\label{ch:cons-uncertain}
 \section{Euler equation}
 In the case of uncertainty in labour incomes, but with certain
 interest rates, the Euler equation becomes
