@@ -11,7 +11,7 @@
 \usepackage[paperwidth=6in,paperheight=9in,inner=0.7in,outer=0.7in,bottom
 =1in]{geometry}
 \usepackage{graphicx}
-\usepackage{amsthm}
+\usepackage{amsthm,amssymb}
 \usepackage{url}
 \usepackage{nicefrac}
 \usepackage{tikz}
@@ -20,14 +20,17 @@
 %\usepackage{mathpazo}
 %\usepackage[scaled=0.9]{helvet}
 
+\numberwithin{figure}{chapter}
 \theoremstyle{plain}
 \newtheorem{lem}{Lemma}[chapter]
+\newtheorem{thm}{Theorem}[chapter]
 \newtheorem{prop}{Proposition}[chapter]
 \newtheorem{cor}{Corollary}[chapter]
 
 
 \theoremstyle{definition}
 \newtheorem{exmp}{Example}[chapter]
+\newtheorem{defn}{Definition}[chapter]
 
 \usepackage{enumitem}
 \newenvironment{exercises}{%
@@ -35,7 +38,14 @@
 \end{enumerate}}
 \newtheorem{excr}{Exercise}[chapter]
 
-\newcommand{\myversion}{v4.1.0}
+\newcommand{\newterm}[1]{\emph{#1}}
+\newcommand{\setset}[1]{\mathcal{#1}}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\P}{\mathbb{P}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+
+\newcommand{\myversion}{v4.3.0}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
@@ -48,6 +58,5 @@
 \setlength{\footskip}{20pt}
 \renewcommand{\headrulewidth}{0pt}
 
-\newcommand{\newterm}[1]{\emph{#1}}
 
 

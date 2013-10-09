@@ -1540,377 +1540,554 @@ which comes to us as a given data and
 which comes to us from our no bequest, no terminal borrowing,
 monotonic utility assumptions about the terminal period.
 
-\chapter{Probability}
-This chapter is not a substitute for studying a probability text such
-as \cite{chung-elementary} or \cite{ross-probability}. We only discuss
-some ideas important for macroeconomic applications which cannot be
-found easily in elementary books like the above. 
+\chapter{Probability}\label{ch:probability}
+We assume that you are familiar with concepts such as
+\emph{sample space}, \emph{random variable},
+\emph{expectation} and \emph{conditional expectation}. Here
+we only discuss some ideas important for macroeconomic
+applications. Our mathematical treatment is applicable to
+only to probability spaces with a finite number of outcomes
+but the ideas can be carried over to more general settings.
+References to more advanced treatments are provided at
+the end of the chapter.
 
-The discussion below is in terms of discrete random variables. Random
-variables which are not discrete can be thought of as limits of
-discrete random variables. For example, we can think of GDP being
-measured in whole rupees or whole paise, and hence being a discrete
-random variable, rather than thinking of it as an infinitely divisible
-real number. In this way the intuition developed for discrete random
-variables can be carried over to general random variables too. But the
-details are tricky and dealing with them in a rigorous manner requires
-the use of techniques from an area of mathematics knows as ``measure
-theory'' which we cannot cover here. If you are interested in such
-things you can look at \cite{jacod-protter-essentials} for an
-introduction and \cite{billingsley-prob-measure} for a classic but
-demanding treatment.
+\section{Information structures}
+In macroeconomics we often have to deal
+simultaneously with randomness and time. For example, we
+might be interested in the entire time path of an agent's
+consumption expenditure when the expenditure in each period
+is random and may depend on other random factors as the
+consumer's income. 
 
-\section{The Law of Iterated Expectations}
-\subsection{Calculation}
-We can calculate the conditional expectation of a particular random
-variable for different sets of conditioning variables. For example, if
-$Y_t$ is the GDP of a country in period~$t$ then
-\[E[Y_{2020}|Y_{2010}]\]
-is the conditional expectation of GDP in 2020 given information about
-GDP in 2010. This will be a function of the realised value of GDP in
-2010. 
+One way in which we could try to simultaneously model
+randomness and time would be to set up a different sample
+space for each time period. We would then define random variables
+corresponding to quantities measured in a particular period
+on the sample space for that period. However, if we do so we
+would not be able to model the dependence between quantities
+in different periods. Such dependence however is common. For
+example, receiving a promotion in period~$t$ may increase
+the likelihood of a high income in period~$t+1$ as well.
 
-Similarly,
-\[E[Y_{2020}|Y_{2010},Y_{2015}]\]
-is the conditional expectation of GDP in 2020 but now given
-information about  GDP both in 2010 and 2015. This will be a joint function
-of the realised values of GDP in 2010 and in 2015.
+To capture the dependence between random events at different
+periods of time, we need a common sample space on which
+random variables corresponding to different time periods can
+be simultaneously define. We are thus led to construct a
+sample space such that each sample point contains enough
+information to tell us about the entire trajectory of any
+quantity that we may be interested in. While we continue to
+refer to sample points as ``states of the world'' in this
+context they are better seen as complete ``histories of the
+world''---each sample point representing one possible
+history.
 
-In examples like the above, where one of the sets of conditioning
-variables is a superset of another, we can derive a relationship
-between the two conditional expectations known as the \newterm{law of
-  iterated expectations}. To state the law in a general form we gather
-together the conditioning variables into a set called the
-\newterm{information set}. So the two conditional expectations above
-would be written as
-\[E[Y_{2020}|I_1], \quad I_1=\{Y_{2010}\}\]
-and 
-\[E[Y_{2020}|I_2], \quad I_2=\{Y_{2010},Y_{2015}\}\]
-respectively where $I_1$ and $I_2$ are the information sets. 
+When modelling the combination of
+randomness and time we must also represent the fact that
+information is only gradually revealed to agents. Even
+though each sample point contains information regarding the
+entire trajectory of all variables, this full trajectory is
+not known to agents when they take decisions. At the very
+best, agents taking a decision at time~$t$ know only what
+has happened until time~$t$. They have no way of looking
+into the future. In many economically interesting problems,
+there may be agents who do not even have full information
+regarding current and past events. 
 
-The law of iterated expectations says that for any random variable~$Y$
-\begin{equation}\label{eq:law-iterated}
-E[E[Y|I_2]|I_1]=E[Y|I_1],\quad \text{if $I_1 \subset I_2$}
-\end{equation}
+We need some way to keep track of what is known when. The
+way we do this is by grouping together outcomes (sample
+points) at each point of time. Two outcomes are placed in the
+same group if they cannot be distinguished based on
+information that is available at that point of time. Two
+outcomes which are not distinguishable at one point of time
+may become distinguishable at a later point of time when
+more information arrives. However, we assume that people
+never forget what they know---so if two outcomes were
+distinguishable at a point of time then they must remain
+distinguishable at future points of time.
 
-The inner expectation $E[Y|I_2]$ is a function of the realised values
-of the random variables in the information set $I_2$. But suppose we
-don't know the values of all the variables in $I_2$ but only those of
-a subset $I_1$. Then the left-hand side of~\eqref{eq:law-iterated} is
-asking us to carry out a two-step process. First we calculate the
-conditional expectation $E[Y|I_2]$ for all possible realisations of
-variables in $I_2$. Then we average out these conditional expectations
-using the probability of the realisation of the different
-values of $I_2$ conditional on variables in $I_1$. This is
-$E[E[Y|I_2]|I_1]$. The law of iterated
-expectations tells us that the result of this two-step process is the
-same as that of directly calculating the expectation of
-$Y$ conditional on $I_1$.
-
-\begin{exmp}\label{exmp:three-toss-conex}
-Suppose I toss an unbiased coin thrice. If the coin comes up heads I
-win one rupee and if the coin comes up tails I lose one rupee. Let
-$Y_1$, $Y_2$ and~$Y_3$ be my cumulative net winnings after the first,
-second and third tosses respectively.
-
-The probability mass function (pmf) of $Y_3$ conditional on $Y_1$ and $Y_2$ is
-\[f(y_3|y_1,y_2)=
-\begin{cases}
-1/2&y_3=\phantom{-}1,y_1=\phantom{-}1,y_2=\phantom{-}0\\
-1/2&y_3=-1,y_1=\phantom{-}1,y_2=\phantom{-}0\\
-1/2&y_3=\phantom{-}3,y_1=\phantom{-}1,y_2=\phantom{-}2\\
-1/2&y_3=\phantom{-}1,y_1=\phantom{-}1,y_2=\phantom{-}2\\
-1/2&y_3=\phantom{-}1,y_1=-1,y_2=\phantom{-}0\\
-1/2&y_3=-1,y_1=-1,y_2=\phantom{-}0\\
-1/2&y_3=-1,y_1=-1,y_2=-2\\
-1/2&y_3=-3,y_1=-1,y_2=-2\\
-0&\text{elsewhere}
-\end{cases}\]
-
-The expectation of $Y_3$ conditional on $Y_1$ and $Y_2$ is therefore
-given by,
-\[E[Y_3|Y_1,Y_2]=
-\begin{cases}
-1/2\cdot 1+1/2 \cdot -1=0&y_1=\phantom{-}1,y_2=\phantom{-}0\\
-1/2\cdot 3+1/2 \cdot 1 =2&y_1=\phantom{-}1,y_2=\phantom{-}2\\
-1/2\cdot 1+1/2\cdot -1 =0&y_1=-1,y_2=\phantom{-}0\\
-1/2\cdot -1+1/2\cdot -3=-2&y_1=-1,y_2=-2
-\end{cases}\]
-
-Now suppose that instead of observing both $Y_1$ and $Y_2$ we observe
-only $Y_1$. To carry out the two-step process required by the law of
-iterated expectations we need the pmf of $Y_2$ conditional on $Y_1$.
-
-\[f(y_2|y_1)=
-\begin{cases}
-1/2 & y_2 = \phantom{-}0, y_1=\phantom{-}1\\
-1/2 & y_2 = \phantom{-}2, y_1=\phantom{-}1\\
-1/2 & y_2 = \phantom{-}0, y_1=-1\\
-1/2 & y_2 = -2, y_1=-1\\
-0 & \text{elsewhere}
-\end{cases}\]
-
-So we have
-\begin{align}\label{eq:lhs-law-iter-ex}
-E[E[Y_3|Y_1,Y_2]|Y_1]&=\sum_{y_2}E[Y_3|Y_1=y_1,Y_2=y_2]f(y_2|y_1)\\
-&=\begin{cases}
-1/2\cdot 0+1/2 \cdot 2=1 & y_1=\phantom{-}1\\
-1/2\cdot 0+1/2\cdot -2=-1 &y_1=-1
-\end{cases}
-\end{align}
-
-On the other hand if we had wanted to directly calculate $E[Y_3|Y_1]$
-we would have needed the pmf of $Y_3$ conditional on $Y_1$ which is
-\[f(y_3|y_1)=
-\begin{cases}
-1/4 & y_3=\phantom{-}3,y_1=\phantom{-}1\\
-1/2 & y_3=\phantom{-}1,y_1=\phantom{-}1\\
-1/4 & y_3=-1,y_1=\phantom{-}1\\
-1/4 & y_3=\phantom{-}1,y_1=-1\\
-1/2 & y_3=-1,y_1=-1\\
-1/4 & y_3=-3,y_1=-1\\
-0 & \text{elsewhere}
-\end{cases}\]
-
-So the conditional expectation is
-\begin{equation}\label{eq:rhs-law-iter-ex}
-E[Y_3|Y_1]=\begin{cases}
-1/4\cdot 3+1/2 \cdot 1 +1/4\cdot -1 =1&y_1=\phantom{-}1\\
-1/4\cdot 1+1/2 \cdot -1+1/4\cdot -3 =-1&y_1=-1
-\end{cases}
-\end{equation}
-
-Comparing~\eqref{eq:lhs-law-iter-ex} and~\eqref{eq:rhs-law-iter-ex} we
-verify that the law of iterated expectations holds in this case.
-\qed
-\end{exmp}
-
-\subsection{Intuition}
-One can think of an expectation as a weighted average with the
-probabilities of outcomes acting as the weights. In the case of an
-unconditional expectation we take the average over the entire sample
-space. In the case of a conditional expectation we break up the sample
-space into chunks, each chunk consisting of one possible set of
-realisations of the variables in the information set, and then average
-separately over each chunk. 
-
-Thus, in Example~\ref{exmp:three-toss-conex} the sample space is
+Here's an example. Suppose we toss a coin thrice in a row.
+Each sample point must give us information regarding the
+full history of the tosses, so the sample space is,
 \[\Omega=\{HHH,HHT,HTH,HTT,THH,THT,TTH,TTT\}.\]
-If we condition on the information set $I_1=\{Y_1\}$ then the sample
-space is broken into the following chunks
+Before we have begun to toss the coins we don't know which
+of these trajectories our world will follow. So all the
+outcomes are indistinguishable from each other. Suppose that
+the first toss turns up heads. We know that the history of
+our world must be one of 
+\[\{HHH,HHT,HTH,HTT\}\]
+ but we cannot
+distinguish between different members of this set since they
+differ in the outcomes of the second and the third tosses
+which we have not observed yet. Similarly if the first toss
+had come up tails we would have known that our world must be one
+of 
+\[\{THH,THT,TTH,TTT\}\]
+ but again we could not make a finer
+distinction. So the set of indistinguishable groups is 
+\[\{\{HHH,HHT,HTH,HTT\},\{THH,THT,TTH,TTT\}\}.\]
 
-\begin{table}[h]
-\begin{tabular}{ll}
-\hline
-Chunk&Realisation of $I_1$\\
-\hline
-$C_1=\{HHH,HHT,HTH,HTT\}$&$Y_1=1$\\
-$C_2=\{THH,THT,TTH,TTT\}$&$Y_1=-1$\\
-\hline
-\end{tabular}
-\caption{Decomposition of the sample space by the information set $I_1$}\label{tab:decomp_I1}
-\end{table}
+Now suppose the outcome of the second toss is revealed to
+us. Knowing this outcome allows us to distinguish between some of the
+outcomes we could not distinguish between before. The set of
+indistinguishable groups becomes,
+\[\{\{HHH,HHT\},\{HTH,HTT\},\{THH,THT\},\{TTH,TTT\}\}.\]
 
-On the other hand, if the information set is $I_2 = \{Y_1,Y_2\}$ then
-the chunks are
-\begin{table}[h]
-\begin{tabular}{ll}
-\hline
-Chunk&Realisation of $I_2$\\
-\hline
-$C'_1=\{HHH,HHT\}$&$Y_1=1,Y_2=2$\\
-$C'_2=\{HTH,HTT\}$&$Y_1=1,Y_2=0$\\
-$C'_3=\{THH,THT\}$&$Y_1=-1,Y_2=0$\\
-$C'_4=\{TTH,TTT\}$&$Y_1=-1,Y_2=-2$\\
-\hline
-\end{tabular}
-\caption{Decomposition of the sample space by the information set $I_2$}\label{tab:decomp_I2}
-\end{table}
+With this example at hand we can now give the following
+formal definitions.
+\begin{defn}[Partition]
+  A \newterm{partition} $\setset{P}$ is a set of subsets
+  $A_i$ of $\Omega$ such that $A_i \cap A_j = \emptyset$ if
+  $i\ne j$ and $\cup_i A_i = \Omega$.
+\end{defn}
+In the language of events a partition is a collection of
+mutually exclusive and exhaustive events. 
 
-The important thing to note here is that each of the chunks created
-by~$I_1$ is a union of some chunks created by~$I_2$. For example,
-$C_1=C'_1 \cup C'_2$. This is a consequence of $I_1$ being a subset of
-$I_2$. So if two outcomes produce the same values for the variables in
-$I_2$ they must necessarily produce the same values for the variables
-in $I_1$.
+\begin{defn}[Fineness]
+  Given two partitions $\setset{P}$ and $\setset{Q}$, the
+  partition $\setset{P}$ is said to be \newterm{finer} than
+  the partition $\setset{Q}$ if for every $A \in \setset{P}$
+  there is a $B \in \setset{Q}$ such that $A \subset B$.
+\end{defn}
+Thus $\setset{P}$ is finer than $\setset{Q}$ if every event
+in $P$ is a subset of some event in $Q$.
 
-In this setup $E[Y_3|I_2]$ averages $Y_3$ separately over each of the
-chunks $C'_1,\ldots,C'_4$ whereas $E[Y_3|I_1]$ averages $Y_3$
-separately over $C_1$ and $C_2$. 
+\begin{defn}[Information structure]
+  An \newterm{information structure} is a sequence of
+  partitions $\setset{P}_t$ such that if $t \ge s$ then
+  $\setset{P}_t$ is finer than $\setset{P}_s$.
+\end{defn}
+The interpretation is the same as that in our coin-tossing
+example. Each event in $\setset{P}_t$ consists of outcomes
+that cannot be distinguished based on information at
+time~$t$. The requirement that partitions at later times be
+finer than partitions at earlier times says that information
+is not forgotten---two events that were distinguishable at
+time $s$ and hence belonged to different events in
+$\setset{P}_s$ cannot become indistinguishable at time~$t$.
 
-The law of iterated expectations~\eqref{eq:law-iterated} says, for example, that it
-does not matter in the calculation of $E[Y_3|Y_1=1]$ if we replace the
-actual values of $Y_3$ on $HHH$ and $HHT$ by their average over $C'_1$
-which is $E[Y_3|Y_1=1,Y_2=2]$ and the actual values of $Y_3$ on $HTH$ and
-$HTT$ by their average over $C'_2$ which is $E[Y_3|Y_1=1,Y_2=0]$.
+\section{Event tree}
+\newterm{Event trees} provide a graphical representation of
+information structures. Every event in $\setset{P}_t$ becomes
+a node in the tree. Since partitions must become finer over
+time, for every node $A$ in $\setset{P}_{t+1}$
+there must be a node $B$ in $\setset{P}_t$ such that $A
+\subset B$. In that case we draw an arrow from $B$ to $A$.
+For example Figure~\ref{fig:cointoss-tree} shows the event
+tree for the coin tossing example.
 
-The intuitive reason is that all the outcomes in any $C_i'$ are going to
-be in the same $C_j$ and with the same relative weights and so
-replacing individual values with averages in a $C_i'$ would make no
-difference to the overall average in a $C_j$. This is why the
-assumption $I_1 \subset I_2$ is important. Without this assumption
-the outcomes in a $C_i'$ might be split over different $C_j$ and
-therefore replacing the individual values with averages in a $C_i'$
-would affect the calculation of averages over the $C_j$.
+For each outcome in the sample space, we can think of the
+evolution of the system over time tracing out a
+path in the event tree by picking up the nodes to which the
+outcome belongs and following the arrows which join these
+nodes. Thus, for example, in Figure~\ref{fig:cointoss-tree}
+the nodes in red trace out the path corresponding to the
+outcome $THT$. 
 
-Figures~\ref{fig:lie-lhs} and~\ref{fig:lie-rhs} present the same reasoning in
-graphical form. The operation of taking conditional expectations can
-be thought of as a smoothing or blurring operations that erases the
-variation in the variable whose expectation is being taken and instead
-gives
-us a constant over each chunk corresponding to
-one realisation of the variables in the information set. The smaller
-the information set, the bigger the chunks, and hence the more drastic
-the blurring. Then the law of iterated expectation says that if we
-want to blur over some big boxes then there is no harm in blurring over
-some small boxes first provided that each small box lies within a
-single big box.
-
-\begin{figure}
-\includegraphics[width=\textwidth]{iter_expect/lie1.pdf}\\
-\includegraphics[width=\textwidth]{iter_expect/lie2.pdf}\\
-\includegraphics[width=\textwidth]{iter_expect/lie3.pdf}
-\caption{Law of iterated expectations, left-hand side}\label{fig:lie-lhs}
-\end{figure}
 
 \begin{figure}
-\includegraphics[width=\textwidth]{iter_expect/lier1.pdf}\\
-\includegraphics[width=\textwidth]{iter_expect/lier2.pdf}
-\caption{Law of iterated expectations, right-hand side}\label{fig:lie-rhs}
+  \centering
+  \begin{tikzpicture}[font=\footnotesize,grow=down,
+    edge from parent path = 
+    {[->] (\tikzparentnode) -- (\tikzchildnode)},
+    every node/.style = {rectangle,draw,thin},
+    level 1/.style = {sibling distance = 16em},
+    level 2/.style = {sibling distance = 8em},
+    level 3/.style = {sibling distance = 4em}
+    ]
+    \node[red] {$\{HHH,HHT,HTH,HTT,THH,THT,TTH,TTT\}$}
+    child { node {$\{HHH,HHT,HTH,HTT\}$}
+      child { node {$\{HHH,HHT\}$}
+        child {node {$\{HHH\}$}}
+        child {node {$\{HHT\}$}}}
+      child { node {$\{HTH,HTT\}$}
+        child {node {$\{HTH\}$}}
+        child {node {$\{HTT\}$}}}}
+   child { node[red] {$\{THH,THT,TTH,TTT\}$}
+      child { node[red] {$\{THH,THT\}$}
+        child {node {$\{THH\}$}}
+        child {node[red] {$\{THT\}$}}}
+      child { node {$\{TTH,TTT\}$}
+        child {node {$\{TTH\}$}}
+        child {node {$\{TTT\}$}}}};
+  \end{tikzpicture}
+  \caption{Event tree for the coin-tossing example. Nodes in
+  \textcolor{red}{red} trace the path of the outcome $THT$.}
+  \label{fig:cointoss-tree}
 \end{figure}
 
-\subsection{Uses}
-\subsubsection{Simplifying calculations}
-The first use of the law of iterated expectation is to simplify the
-calculation of complicated expectations. Examples can be found
-in~\cite{ross-probability}. Two results which are useful
-in such calculations are as follows.
+\section{Partitions generated by random variables}
+We have seen that partitions of the sample space can be used
+to model the state of knowledge of an agent, with all the
+outcomes belonging to a single event in the partition 
+being considered to be indistinguishable.
 
-\begin{prop}\label{prop:conex-funx}
-  For any two random variables $X$ and $Y$ and information set $I$, if
-  $X$ belongs to the information set $I$ and $h(X)$ is any function of
-  $X$ then
-  \[E[h(X)Y|I]=h(X)E[Y|I].\]
+Since the value of a random variable differs from point to
+point in the sample space, a random variable also conveys
+information about what the state of the world is. The
+information is not necessarily full information, since the
+random variable may have the same value at two different
+points in the sample space. In fact, for a given random
+variable $X$, if we consider all sample points at which $X$
+has the same value as indistinguishable and all points at
+which $X$ has different values as distinguishable we obtain
+a partition of the sample space. This is called the
+\newterm{partition generated by $X$}, denoted by $\setset{P}(X)$.
+
+In economic models we often want to specify that the
+information contained in a random variable $X$ be no more
+than the information already available according to another
+partition $\setset{P}$. This is captured by the following
+definition.
+
+\begin{defn}[Measurability]
+  A random variable $X$ is measurable with respect to a
+  parition $\setset{P}$ if $\setset{P}$ is finer than the
+  partition generated by $X$.
+\end{defn}
+
+Note that we have only required $\setset{P}$ to be finer
+than the partition generated by $X$ and not necessarily
+equal to it. This is because we want to allow for the fact
+that $\setset{P}$ contains more information than is conveyed
+by $X$ so that we can distinguish between two outcomes on
+the basis of $\setset{P}$ even though we cannot distinguish
+them on the basis of $X$. All that we require is that things
+that we can distinguish on the basis of $X$ be
+distinguishable on the basis of $\setset{P}$.
+ 
+There are two reasons why we may want to impose the
+requirement of measurability on the variables of a
+model. First, in the case of exogenous variables we would
+like to impose this requirement to model the fact that the
+information contained in $X$ is already captured in
+$\setset{P}$. So for example we will assume that the
+consumer's endowment is measurable if we want to model the
+fact that consumers know what their endowments are. Second,
+for an endogenous variable we want to model the fact that
+the consumer's decisions are limited by the information that
+they have. Thus we would require that consumption expenditure
+should be measurable since if a consumer cannot distinguish
+between two states of the world on the basis of her
+information, there is no way that she can choose different
+condumption expenditure in those two states.
+
+A sequence of random variables $X_t$ indexed by time is
+known as a \newterm{stochastic process}. A stochastic
+process captures the evolution of a random process over
+time.
+
+We have already modelled the evolution of information over
+time by an information structure. The extension of the
+notion of measurability to this intertemporal context is
+given by the following.
+
+\begin{defn}[Adapted Process]
+  A stochastic process $X_t$ is adapted to an information
+  structure $\setset{P}_t$ if $X_t$ is measurable with
+  respect to $P_t$ for each $t$. 
+\end{defn}
+
+Thus the knowledge of the values taken by a process adapted
+to $\setset{P}_t$ does not convey any more information at
+time $t$ than what is conveyed by $\setset{P}_t$ itself. If
+we represent $\setset{P}_t$ by an event tree then a process
+$X_t$ is adapted to $\setset{P}_t$ if any only if it takes
+the same value on all the outcomes that belong to a single
+node of the event tree. Because of this property of
+processes which are adapted to an event tree, we can think
+of the process as taking on a value on each of the tree
+nodes, rather than on each point of the sample space.
+
+\section{Conditional expectation}
+Suppose we do not directly observe the random variable $X$
+but have some other information represented by the partition
+$\setset{P}$. What is the best that we can say about $X$
+given this information? One answer to this is the concept of
+condition expectation.
+
+Given a partition $\setset{P}$ and an outcome $\omega$ there
+is a unique event in $\setset{P}$ which contains
+$\omega$. We denote it by $A_{\setset{P}}(\omega)$.
+
+\begin{defn}[Conditional expectation]\label{def:conex}
+  Given a random variable $X$ and a partition $\setset{P}$
+  the conditional expectation of $X$ with respect to
+  $\setset{P}$, denoted $\E[X\mid\setset{P}]$ is a random
+  variable defined by
+  \[\E[X\mid\setset{P}](\omega) 
+  = \frac{\displaystyle \sum_{\omega' \in A_{\setset{P}}(\omega)} X(\omega')\P(\omega')}
+  {\displaystyle\sum_{\omega' \in A_{\setset{P}}(\omega)} \P(\omega')}\]
+  where $\P(\omega')$ denotes the probability of the outcome
+  $\omega'$. 
+\end{defn}
+
+The conditional expectation $\E[X \mid \setset{P}]$ is a
+random variable in its own right. Our best guess about $X$
+would depend on what information we have actually received
+and therefore would be different in different states of the
+world.
+
+\begin{exmp}
+  Consider a coin which is tossed twice, so that our sample
+  space is $\Omega=\{HH,HT,TH,TT\}$. Assume that all the
+  outcomes have an equal probability of $1/4$.
+
+  Let $X$ be the number
+  of heads in a toss. This is a random variable with the
+  values $X(HH)=2$, $X(HT)=1$, $X(TH)=1$ and $X(TT)=0$. 
+
+  Suppose we have observed only the first toss of the
+  coin. Our information parition is
+  \[\setset{P}=\{\{HH,HT\},\{TH,TT\}\}.\]
+  What is $\E[X \mid \setset{P}]$?
+
+  Let us begin with the outcome
+  $HH$. $A_{\setset{P}}(HH)=\{HH,HT\}$ so we have
+  \[\E[X\mid\setset{P}](HH) 
+  = \frac{X(HH)\P(HH)+X(HT)\P(HT)}
+  {\P(HH)+\P(HT)}=1.5\]
+  Similarly,
+  \begin{align*}
+    \E[X\mid\setset{P}](HT) 
+    &= \frac{X(HH)\P(HH)+X(HT)\P(HT)}
+    {\P(HH)+\P(HT)}=1.5\\
+    \E[X\mid\setset{P}](TH) 
+    & = \frac{X(TH)\P(TH)+X(TT)\P(TT)}
+    {\P(TH)+\P(TT)}=0.5\\
+    \E[X\mid\setset{P}](TT) 
+    &= \frac{X(TH)\P(TH)+X(TT)\P(TT)}
+    {\P(TH)+\P(TT)}=0.5
+  \end{align*}
+
+  Note that $\E[X \mid \setset{P}]$ is defined for each
+  element of the sample space, as a random variable should
+  be. But its value is constant within each element of
+  $\setset{P}$. We will see below that this is a general
+  property of conditional expectations.
+\end{exmp}
+\subsection{Properties}
+We now list some properties that will be useful for
+computing conditional expectations later.
+
+\subsubsection{Measurability}
+\begin{prop}
+  For any random variable $X$, the random variable $\E[X
+  \mid \setset{P}]$ is measurable with respect to
+  $\setset{P}$.
 \end{prop}
+\begin{proof}
+  The right-hand side of the definition of conditional
+  expectation (Definition~\ref{def:conex}) depends only on
+  the set $A_{\setset{P}}(\omega)$. If $\omega$ and
+  $\omega''$ belong to the same set $A$ in $\setset{P}$ then
+  we would have
+  $A_{\setset{P}}(\omega)=A_{\setset{P}}(\omega'')$ and
+  hence $\E[X \mid \setset{P}](\omega)=\E[X \mid
+  \setset{P}](\omega'')$. Since $A$ was an arbitrary member
+  of $\setset{P}$ our argument shows that $\E[X \mid
+  \setset{P}]$ must be constant over every such set. It is
+  therefore measurable with respect to $\setset{P}$.
+\end{proof}
 
-\begin{prop}\label{prop:conex-ind}
-For any random variable $Y$ and information set $I$, if $Y$ is
-  independent of the variables in $I$ then
-  \[E[Y|I]=E[Y].\]
-\end{prop}
+This property is a reasonable one. If the information we
+have does not allow us to distinguish between the states of
+the world $\omega$ and $\omega''$ then the best guess we can
+make about $X$ in the two states must be the same.
 
-The two results above correspond to two extremes of information
-availability. In the first case knowing $I$ gives us full information
-about $X$ and therefore functions of $X$ behave like constants and
-come out of expectations. In the second case knowing $I$ gives us no
-information about $Y$ and therefore the conditional expectation is
-the same as the unconditional expectations.
+In a way this is also the most important property of the
+conditional expectation. If our information $\setset{P}$
+does not allow us to know the exact value of $X$ we cannot
+base our decisions on that value. But we would always know
+the value of $\E[X \mid \setset{P}]$ and can base our
+decisions on it.
 
-\subsubsection{Gradual Revelation of Information}
-The past is known whereas the future is unknown. The future, though,
-depends on the past and therefore knowledge about the past is helpful
-in predicting the possibilities for the future. As we flow through
-time, moments pass from the future, through the present, and into the
-past, resulting in an accumulation of knowledge and a change in our
-beliefs about the future. A model of macroeconomic dynamics must
-incorporate these facts about time and knowledge while not giving up
-on the machinery for talking about uncertainty that the
-probabilists have developed. 
-
-The way we do this is as follows. We set up our probability model in a
-`timeless' way. Thus in Example~\ref{exmp:three-toss-conex} even
-though the three tosses happen over time we think of each point in
-sample space as specifying the result of all three tosses. For each
-point of time~ $t$ an information set~$I_t$ is given which specifies
-what an agent knows at that time. This information set breaks up the
-sample space into chunks. Thus, for example, if we observe that the
-first toss has come up heads we know that the outcome must be one of
-$HHH$, $HHT$, $HTH$ or $HTT$. If the first toss had come up tails we
-would have known that the outcome must have been one of $THH$, $THT$,
-$TTH$ or $TTT$. These are precisely the sets~$C_1$ and~$C_2$ in
-Table~\ref{tab:decomp_I1}. Once the results of the second toss comes
-in our information set becomes larger and we can narrow down the
-possible outcomes and know that we are in one of the sets
-$C'_1,\ldots,C'_2$ in Table~\ref{tab:decomp_I2}. Thus the gradual
-accumulation of knowledge is modelled by adding an increasing sequence
-of information sets to a timeless probability model.\footnote{Our increasing
-  sequences of information sets is a special case of the more general
-  concept of \newterm{filtrations} used by probabilists to model the
-  accumulation of information. See ~\cite{billingsley-prob-measure} for details.} 
-
-To be consistent with this formalisation we require that agents
-choices be constant over each chunk created by their information sets.
-So if an agent has to make a decision after observing only the first
-toss then the agent cannot decide differently for the two outcome
-$HHT$ and $HHH$ since at that time the agent does not have enough
-information to distinguish between those two outcomes. The agent can
-however choose differently for the two outcomes $HHT$ and $THT$ since
-knowing the result of the first toss allows her to discriminate
-between these two outcomes. This requirement that a random variable
-like the agent's choice be constant across each chunk created by an
-information set has a formal name---we say that the random variable is
-\newterm{measurable} with respect to the information set. By
-construction expectation conditional on an information set are always
-measurable with respect to that information set.
-
-The notion of measurability allows us to add one more trick useful for
-working with conditional expectations. 
-
+\subsubsection{Expectation of a measurable random variables}
+If a random variable is measurable with respect to a
+partition then knowing where we are in the partition gives
+us the exact value of the random variable. No further
+forecasting is required. So we have,
 \begin{prop}\label{prop:conex-measure}
-If $I$ is some information set,
-$Y$ is any random variable and $X$ is a random variable measurable
-with respect to $I$ then
-\[E[XY|I]=XE[Y|I]\]
+  If the random variable $X$ is measurable with respect to
+  the partition $\setset{P}$ then
+  \[\E[X\mid \setset{P}]=X.\]
 \end{prop}
-This is a generalisation of Proposition~\ref{prop:conex-funx}. If $X$
-is measurable with respect to $I$ then it is constant on each chunk
-created by $I$ and can therefore can be taken out like a constant
-while calculating expectations conditional on $I$.
 
-Agents in macroeconomic models must often forecast the value of future
-random variables based on the limited information that they have at an
-earlier point of time. The \newterm{rational expectations} assumption,
-which is the most common assumption about expectations currently in
-macroeconomics, says that this forecast is equal to the conditional
-expectation of the future variable based on the agent's current
-information set. So if $Y_3^{e,1}$ is an agent's forecast after the
-first toss of final
-winnings in the game in Example~\ref{exmp:three-toss-conex},
-then rational expectation says that
-\[Y_3^{e,1}=E[Y_3|I_1].\]
-The left-hand side of the above equation is an economic agent's
-subjective forecast while the right-hand side is a mathematical
-expectation calculated from a probability model. There is no logical
-reason why they have to be equal, only an economic assumption that
-they are.
+The intuition behind the proposition is this: if
+$\setset{P}$ already contains the information in $X$ then
+knowing the information in $\setset{P}$ gives us the actual
+value of $X$ and no averaging is required.
 
-Sometimes we have to go further and make forecasts about forecasts.
-For example, we may want to forecast after the first toss what we
-would think of our final winnings after seeing the second toss.
-Applying the assumption of rational expectations to both these
-forecasts we get the answer
-\[E[E[Y_3|I_2]|I_1].\]
-The law of iterated expectations allows us to simplify this to
-\[E[Y_3|I_1].\]
-Thus the forecast of a forecast is the same as a direct forecast. We
-shall take advantage of this simplification again and again in our
-future work in macroeconomics. It is one of the reasons that we give
-so much importance to the law of iterated expectations.
+Rather than proving this result we will prove the following
+slight generalisation,
+
+\begin{prop}\label{prop:conex-measure-gen}
+  If the random variable $X$ is measurable with respect to
+  the partition $\setset{P}$ and $Y$ is any random variable then
+  \[\E[XY\mid \setset{P}]=X\E[Y \mid \setset{P}].\]
+\end{prop}
+\begin{proof}
+  From Definition~\ref{def:conex} we have
+  \begin{align*}
+  \E[XY\mid\setset{P}](\omega) 
+  &= \frac{\displaystyle \sum_{\omega' \in A_{\setset{P}}(\omega)} 
+    X(\omega')Y(\omega')\P(\omega')}
+  {\displaystyle\sum_{\omega' \in A_{\setset{P}}(\omega)} 
+    \P(\omega')}\\
+  \intertext{But if $X$ is measurable with respect to
+    $\setset{P}$ then $X$ must be constant over each element
+    of $\setset{P}$.}
+  \intertext{In particular it must be constant over
+    $A_{\setset{P}}(\omega)$. Since $\omega \in
+    A_{\setset{P}}(\omega)$, we have
+    $X(\omega')=X(\omega)$ for all $\omega' \in
+    A_{\setset{P}}(\omega)$.  So we have,}
+  \E[XY\mid\setset{P}](\omega)
+  &= \frac{\displaystyle \sum_{\omega' \in A_{\setset{P}}(\omega)} 
+    X(\omega)Y(\omega')\P(\omega')}
+  {\displaystyle\sum_{\omega' \in A_{\setset{P}}(\omega)} 
+    \P(\omega')}\\
+  &= X(\omega)\left[\frac{\displaystyle \sum_{\omega' \in A_{\setset{P}}(\omega)} 
+    Y(\omega')\P(\omega')}
+  {\displaystyle\sum_{\omega' \in A_{\setset{P}}(\omega)} 
+    \P(\omega')}\right]\\
+  &= X(\omega)\E[Y \mid \setset{P}]
+  \end{align*}
+\end{proof}
+
+\subsubsection{Law of iterated expectations}
+We can imagine the operation of taking the conditional
+expectation of a random variable with respect to a partition
+as a `blurring' operation: within each event of the
+partition we replace the individual values of the random
+variable by a common average value. The \newterm{law of iterated
+  expectation} says that blurring on a fine grid and then
+further blurring the result on a coarser grid gives the same result as
+blurring the original variable directly on a coarse grid.
+More formally,
+\begin{thm}
+  Given a random variable $X$ and two partitions $\setset{P}$
+  and $\setset{Q}$ where $\setset{Q}$ is finer than
+  $\setset{P}$ it is the case that
+  \[\E\{\,\E[X \mid \setset{Q}] \mid \setset{P}\,\}
+  = \E[X \mid \setset{P}].\]
+\end{thm}
+\subsection{Special cases}
+\subsubsection{Unconditional expectation}
+Consider the trivial partition $\setset{T}$ which has only
+one element---the full sample space $\Omega$. Then for any
+$\omega$ we have $A_{\setset{T}}(\omega)=\Omega$ and the
+definition of conditional expectation gives us
+\begin{align*}
+  \E[X\mid\setset{T}](\omega) 
+  &= \frac{\displaystyle \sum_{\omega' \in \Omega} 
+    X(\omega')\P(\omega')}
+  {\displaystyle\sum_{\omega' \in \Omega} 
+    \P(\omega')}\\
+  \intertext{But from the axioms of probability
+    $\sum_{\omega' \in \Omega} \P(\omega')=1$, so we have}
+  \E[X\mid\setset{T}](\omega) 
+  &= \sum_{\omega' \in \Omega} 
+    X(\omega')\P(\omega')
+\end{align*}
+
+You should recognize the right-hand side above as just the
+unconditional expectation of $X$, $\E[X]$. Thus the
+unconditional expectation can be seen as a special case of
+the conditional expectation where the conditioning is over
+the trivial partition which represents complete lack of
+information.
+
+\subsubsection{Expectation conditional on a random variable}
+When the partition over which we are conditioning is
+generated by a random variable then we say and write, as a
+form of shorthand, that we are conditioning on the random
+variable. So if $X$ and $Y$ are two random variables then we
+define
+\[\E[Y \mid X] = \E[Y \mid \setset{P}(X)].\]
+
+\begin{exmp}
+  Consider a sample space $\Omega =
+  \{\omega_1,\omega_2,\omega_3,\omega_4\}$ and two random
+  varables $X$ and $Y$ defined on that sample space. The
+  probabilities of the sample point and the values of the
+  random variables at them are
+  
+  \begin{center}
+    \begin{tabular}{llll}
+      \hline
+      $\omega$&$\P(\omega)$&$X(\omega)$&$Y(\omega)$\\
+      \hline
+      $\omega_1$&$4/9$&1&1\\
+      $\omega_2$&$2/9$&1&0\\
+      $\omega_3$&$2/9$&0&1\\
+      $\omega_4$&$1/9$&1&0\\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  The partition generated by the random variable $Y$,
+  $\setset{P}(Y)$, is 
+  \[\setset{P}(Y) =
+  \{\{\omega_1,\omega_3\},\{\omega_2,\omega_4\}\}.\]
+
+  Then the conditional expectation $\E[X\mid Y]=\E[X\mid
+  \setset{P}(Y)]$ is given by
+  \begin{align*}
+    \E[X \mid Y] (\omega_1)=\E[X \mid Y](\omega_3) &=
+    \frac{X(\omega_1)\P(\omega_1)+X(\omega_3)\P(\omega_3)}
+    {\P(\omega_1)+\P(\omega_3)}\\
+    &=\frac{1\cdot (4/9) + 0\cdot (2/9)}{(4/9+(2/9)} = \frac{2}{3}\\
+    \E[X \mid Y] (\omega_2)=\E[X \mid Y](\omega_4) &=
+    \frac{X(\omega_2)\P(\omega_2)+X(\omega_4)\P(\omega_4)}
+    {\P(\omega_1)+\P(\omega_3)}\\
+    &=\frac{1\cdot (2/9) + 1\cdot (1/9)}{(2/9+(1/9)} = 1
+  \end{align*}
+\end{exmp}
+\subsubsection{Expectation conditional on information at
+  time~$t$}
+When dealing with stochastic processes we often work with an
+information structure, that is, a sequence of partitions
+$\setset{P}_t$. In this context we sometimes write
+``expectation conditional on information at time~$t$'' when
+we condition on the partition $\setset{P}_t$ for a
+particular $t$. We also use the notations $\E_t[X]$ and
+$\E[X \mid t]$ as shorthand for $\E[X \mid \setset{P}_t]$.
+
+\section{Independence}
+We assume that you are familiar with the definition of the
+independence of a set of random variables from elementary
+probability theory. It is possible to extend this definition
+using the language of partitions we have developed above. We
+record only the following useful result,
+
+\begin{prop}
+  If the random variable $X$ is independent of the random
+  variables $Y_1,\ldots,Y_n$ then
+  \[E[X \mid Y_1,\ldots,Y_n] = \E[X].\]
+\end{prop}
+The expectation of a random variable $X$ conditional on
+variables independent of it is just the unconditional
+expectation. This makes intuitive sense since if $X$ is
+independent of the $Y_i$ then knowing the $Y_i$ gives us no
+knowledge about $X$.
+
 
 \section{Martingales}
-Let $X_t$ be a sequence of random variables and $I_t$ be a sequence of
-information sets such that,
+\begin{defn}[Martingale]
+Let $X_t$ be a stochastic process, and $\setset{I}_t$ and
+information structure with the following properties:
 \begin{enumerate}
-\item $I_t \subset I_{t+1}$.
-\item $X_t$ is measurable with respect to $I_t$.
-\item $E[|X_t|]<\infty$.
-\item $E[X_{t+1}|I_t]=X_t$.
+\item $X_t$ is adapted to $\setset{I}_t$.
+\item $\E[X_{t+1} \mid I_t]=X_t$.
 \end{enumerate}
 Then the process $X_t$ is said to be a \newterm{martingale} with
-respect to the sequence of information sets $I_t$.
+respect to the information structure
+$\setset{I}_t$.\footnote{On probability spaces which are not
+  finite, we also need the condition $\E[|X_t|]<\infty$.}
+\end{defn}
 
 Among the defining characteristics of a martingale given above the
-crucial one is the last: $E[X_{t+1}|I_t]=X_t$. This says that
+crucial one is the last: $\E[X_{t+1}|\setset{I}_t]=X_t$. This says that
 conditional on the information available in period $t$ the random
 variable $X_t$ neither grows nor declines in the next period in
 expected value terms. In this a martingale process is like the wealth
@@ -1921,45 +2098,53 @@ decreases cancel out on an average.
 
 We can use Proposition~\ref{prop:conex-measure} and the properties of
 a martingale to show that
-\[E[X_{t+1}-X_t|I_t]=0\]
-and therefore if $Y$ is any variable belonging to $I_t$ then
-\[E[(X_{t+1}-X_{t})Y]=0\]
+\[\E[X_{t+1}-X_t \mid \setset{I}_t]=0\]
+and therefore if $Y$ is any variable measurable with respect
+to $\setset{I}_t$ then
+\[\E[(X_{t+1}-X_{t})Y]=0\]
 so that $X_{t+1}-X_t$ is uncorrelated with $Y$. (Give detailed proofs
 of all the claims made in this paragraph so far.) That is, the change
 in the value of a martingale process is uncorrelated with all the
 information available from the past. Speaking loosely, it is a
 `surprise'. And so a martingale is a sum of surprises.
 
-A random walk is an martingale (Prove. Be careful to specify the
-sequence of information sets.) This has led some economic literature
-to loosely use the term ``random walk'' when discussing martingales.
-This usage should be avoided since not all martingales are random walks.
+A random walk is a martingale (Prove. Be careful to specify
+the sequence of information sets.) This has led some
+economic literature to loosely use the term ``random walk''
+when discussing martingales. This usage should be avoided
+since not all martingales are random walks.
 
-The definition of a martingale tells us about the expectation of a
-value of the process in a period conditional on the information in the
-exactly preceding period. The following proposition covers the case where
-conditioning set and the value is separated by more than one period.
+The definition of a martingale tells us about the
+expectation of a value of the process in a period
+conditional on the information in the immediately preceding
+period. The following proposition covers the case where
+conditioning set and the value is separated by more than one
+period.
 
 \begin{prop}\label{prop:martingale-mp}
-Let $X_t$ be a martingale with respect to the information set sequence
-$I_t$. For any $m$ and any $n>0$,
-\[E[X_{m+n}|I_m]=X_m.\]
+Let $X_t$ be a martingale with respect to the information
+structure $\setset{I}_t$. For any $m$ and any $n>0$,
+\[\E[X_{m+n}\mid \setset{I}_m]=X_m.\]
 \end{prop}
 \begin{proof}
 The proof is by mathematical induction on $n$.
 
-For $n=1$ the proof follows directly from the definition of a martingale.
+For $n=1$ the proof follows directly from the definition of
+a martingale.
 
 Suppose the lemma is true for $n=k$. Consider the case $n=k+1$.
 From the law of
 iterated expectations
-\[E[X_{m+k+1}|I_m]=E[E[X_{m+k+1}|I_{m+k}]|I_m].\]
+\[\E[X_{m+k+1}\mid \setset{I}_m]=
+\E[\E[X_{m+k+1}\mid \setset{I}_{m+k}]\mid\setset{I}_m].\]
 The martingale property, applied at time $m+k$ tells us that
-\[E[X_{m+k+1}|I_{m+k}]=X_{m+k}.\] 
+\[\E[X_{m+k+1}\mid\setset{I}_{m+k}]=X_{m+k}.\] 
 The assumption that the lemma is true for $n=k$ gives us,
-\[E[X_{m+k}|I_m]=X_m.\]
+\[\E[X_{m+k}\mid\setset{I}_m]=X_m.\]
 Putting everything together, we have
-\[E[X_{m+k+1}|I_m]=E[E[X_{m+k+1}|I_{m+k}]|I_m]=E[X_{m+k}|I_m]=X_m\]
+\[\E[X_{m+k+1}\mid \setset{I}_m]
+=\E[\E[X_{m+k+1}\mid \setset{I}_{m+k}]\mid \setset{I}_m]
+=\E[X_{m+k}\mid \setset{I}_m]=X_m\]
 thus establishing the result for $n=k+1$.
 
 Since we have shown that the result is true for $n=1$ and it is true
@@ -1967,6 +2152,98 @@ for $n=k+1$ whenever it is true for $n=k$, it follows from the
 principle of mathematical induction that it is true for all $n>0$.
 \end{proof}
 
+\section*{Exercises}
+\begin{exercises}
+  \item Consider a sample space with three points. List all
+    possible partitions of this sample space. For each pair
+    of partitions from your list, state whether one is finer
+    than the other.
+
+  \item Consider the sample space $\Omega =
+    \{\omega_1,\omega_2,\omega_3,\omega_4\}$ and the two
+    partitions
+    \begin{align*}
+      \setset{P} &=
+      \{\{\omega_1,\omega_1\},\{\omega_3,\omega_4\}\}\\
+      \setset{Q} &= 
+      \{\{\omega_1\},\{\omega_2,\omega_3\},\{\omega_4\}\}.
+    \end{align*}
+    Give an example of a random variable $X$ which is
+    measurable with respect to $\setset{P}$ but not
+    measurable with respect to $\setset{Q}$.
+
+    \item Let $\setset{P}$ and $\setset{Q}$ be two
+      partitions such that $\setset{P}$ is finer than
+      $\setset{Q}$. Argue that any random variable
+      measurable with respect to $\setset{P}$ must
+      necessarily be measurable with respect to
+      $\setset{Q}$.
+
+    \item If $X_t$ is a martingale with respect to the
+      information structure $\setset{I}_t$, show giving
+      reasons for all your steps that
+      \[\E[X_{t+1}-X_t \mid \setset{I}_t] = 0.\]
+
+    \item If $X_t$ is a martingale with respect to the
+      information structure $\setset{I}_t$, and $Y_t$ is a
+      process adapted to $\setset{I}_t$ show giving
+      reasons for all your steps that
+      \[\E[(X_{t+1}-X_t) Y_t] = 0.\]
+
+      [Hint. You will need
+      Proposition~\ref{prop:conex-measure-gen} and the law
+      of iterated expectations.]
+
+    \item Let $\epsilon_t$ be a sequence of independent and
+      identically distributed variables with mean $0$ and
+      variance $\sigma^2$. We define
+      \[Y_t = \epsilon_{t}+b \epsilon_{t-1}\] 
+      for some constant $b$. Calculate
+      \begin{enumerate}
+      \item $\E[Y_t]$
+      \item $\Var[Y_t]$
+      \item $\Cov[Y_t,Y_{t-1}]$
+      \end{enumerate}
+
+    \item Let $\epsilon_t$ be a sequence of independent and
+      identically distributed variables with mean $0$ and
+      variance $\sigma^2$. We define
+      \[Y_t = 
+      \begin{cases}
+        0 & t=0\\
+        bY_{t-1} + \epsilon_t & t>0
+        \end{cases}\] 
+      for some constant $|b|<1$. Calculate
+      \begin{enumerate}
+      \item $\E[Y_t]$
+      \item $\Var[Y_t]$
+      \item $\Cov[Y_t,Y_{t+h}]$ for arbitrary $h>0$.
+      \end{enumerate}
+
+      [Hint: See that $Y_1 = \epsilon_1$, $Y_2 =
+      b\epsilon_1 + \epsilon_2$, $Y_3 = b^2\epsilon_1 +
+      b \epsilon_2 + \epsilon_3$, etc. Use mathematical
+      induction to show
+      \[Y_{t+h} = b^h Y_t+\sum_{i=1}^h b^{h-i} \epsilon_{t+i}.\]
+      Proceed from there.]
+\end{exercises}
+
+\section*{References}
+There are many excellent texts on elementary probability
+theory, for example \cite{chung-elementary} or
+\cite{ross-probability}.
+
+Our representation of information structures using
+partitions is satisfactory only for finite sample spaces. To
+deal rigorously with more general probability spaces and
+random variables which are not discrete we need to replace
+partitions by \newterm{$\sigma$-algebras} and information
+structures by \newterm{filtrations}. These concepts are
+discussed in texts on ``measure-theroetic
+probability''. Examples in order of increasing difficulty
+are \cite{jacod-protter-essentials},
+\cite{williams1991probability} and
+\cite{billingsley-prob-measure}.
 
 
 
